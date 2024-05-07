@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/components/my_button.dart';
 import 'package:fyp/components/my_textfield.dart';
-import 'package:fyp/components/square_tile.dart';
-import 'package:fyp/components/error_message.dart';
+import 'package:fyp/components/privacy_policy.dart';
+// import 'package:fyp/components/square_tile.dart';
+// import 'package:fyp/components/error_message.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -136,22 +137,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     //Checkbox so that user view terms and conditions
-                    SizedBox(
-                      child: Checkbox(
-                        value: isChecked,
-                        activeColor: Colors.orange, 
-                        onChanged: (newBool) {  
-                          setState(() {
-                            isChecked = newBool;
-                          });
-                        },),
-                    ),
+                    // SizedBox(
+                    //   child: Checkbox(
+                    //     value: isChecked,
+                    //     activeColor: Colors.orange, 
+                    //     onChanged: (newBool) {  
+                    //       setState(() {
+                    //         isChecked = newBool;
+                    //       });
+                    //     },),
+                    // ),
                     
-                    //Privacy terms and conditions
-                    Text(
-                      'I have read terms and conditions',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
+                    // //Privacy terms and conditions
+                    // Text(
+                    //   'I have read ',
+                    //   style: TextStyle(color: Colors.grey[600]),
+                    // ),
+                    
+                    const PrivacyPolicy(),
                   ],
                 ),
               ),
@@ -166,45 +169,45 @@ class _RegisterPageState extends State<RegisterPage> {
             
               const SizedBox(height: 10),
             
-              //or continue with
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child:  Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
+              // //or continue with
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child:  Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
                 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),  
-                      ),
-                    ),
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //         child: Text(
+              //           'Or continue with',
+              //           style: TextStyle(color: Colors.grey[700]),  
+              //         ),
+              //       ),
                 
-                    Expanded(
-                      child:  Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              //       Expanded(
+              //         child:  Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             
-              const SizedBox(height: 10),
+              // const SizedBox(height: 10),
             
-              //google sign in button
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                    SquareTile(imagePath: 'lib/images/google.png'),
-                ],
-              ),
+              // //google sign in button
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //       SquareTile(imagePath: 'lib/images/google.png'),
+              //   ],
+              // ),
             
               const SizedBox(height: 10),
             

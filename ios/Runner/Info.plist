@@ -14,7 +14,7 @@
 			<array>
 				<!-- TODO Replace this value: -->
 				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-				<string>com.googleusercontent.apps.861823949799-vc35cprkp249096uujjn0vvnmcvjppkn</string>
+				<string>com.googleusercontent.apps.927060273629-1cvjeu7o304meel9ver49i5319b1ft5k</string>
 			</array>
 		</dict>
 	</array>
@@ -23,7 +23,8 @@
 	<key>GIDClientID</key>
 	<!-- TODO Replace this value: -->
 	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-	<string>[YOUR IOS CLIENT ID]</string>
+	<string>927060273629-1cvjeu7o304meel9ver49i5319b1ft5k</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

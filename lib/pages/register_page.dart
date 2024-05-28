@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/components/my_button.dart';
 import 'package:fyp/components/my_textfield.dart';
-import 'package:fyp/components/privacy_policy.dart';
 // import 'package:fyp/components/square_tile.dart';
 // import 'package:fyp/components/error_message.dart';
 
@@ -141,15 +140,15 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 10),
             
               //Terms and conditions
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const PrivacyPolicy(),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     children: [
+              //       const PrivacyPolicy(),
+              //     ],
+              //   ),
+              // ),
             
               const SizedBox(height: 10),
             

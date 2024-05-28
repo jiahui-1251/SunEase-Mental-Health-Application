@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/src/common_widgets/form/privacy_policy.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
@@ -11,7 +12,7 @@ class SignUpFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: tFormHeight -10),
+      padding: const EdgeInsets.symmetric(vertical: tFormHeight -20),
       child: Form(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,8 +59,11 @@ class SignUpFormWidget extends StatelessWidget {
               )
             ),
     
-            const SizedBox(height: tFormHeight - 10),
-    
+            const SizedBox(height: tFormHeight - 30),
+
+            //Privacy Policy
+            PrivayPolicy(),
+
             //SignUp Button
             SizedBox(
               width: double.infinity,

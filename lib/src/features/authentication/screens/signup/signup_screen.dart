@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
                 // Image(image: AssetImage(tWelcomeImage)),
                 FormHeaderWidget(image: tWelcomeImage, title: tSignUpTitle, subTitle: tSignUpSubTitle),
 
-                SignUpFormWidget(),
+                SignUpFormWidget(),                
 
                 AuthenticationFooterWidget(
                   caption: tAlreadyHaveAccount, 
@@ -42,6 +42,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
+
 
 
 

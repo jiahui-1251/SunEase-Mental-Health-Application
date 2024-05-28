@@ -20,11 +20,13 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText, //Bool variable to hide password when user entering passwords
         decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(8),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(8),
           ),
           fillColor: Colors.grey[200],
           filled: true,

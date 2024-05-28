@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //text editing controllers
+  final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController(); 
@@ -104,13 +105,22 @@ class _RegisterPageState extends State<RegisterPage> {
             
               const SizedBox(height: 20),
               
+              //username textfield
+              MyTextField(
+                controller: userNameController,
+                hintText: 'User Name',
+                obscureText: false,
+              ),
+
+              const SizedBox(height: 10),
+
               //email textfield
               MyTextField(
                 controller: emailController,
                 hintText: 'Email',
                 obscureText: false,
               ),
-            
+              
               const SizedBox(height: 10),
             
               //password textfield
@@ -136,24 +146,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    //Checkbox so that user view terms and conditions
-                    // SizedBox(
-                    //   child: Checkbox(
-                    //     value: isChecked,
-                    //     activeColor: Colors.orange, 
-                    //     onChanged: (newBool) {  
-                    //       setState(() {
-                    //         isChecked = newBool;
-                    //       });
-                    //     },),
-                    // ),
-                    
-                    // //Privacy terms and conditions
-                    // Text(
-                    //   'I have read ',
-                    //   style: TextStyle(color: Colors.grey[600]),
-                    // ),
-                    
                     const PrivacyPolicy(),
                   ],
                 ),

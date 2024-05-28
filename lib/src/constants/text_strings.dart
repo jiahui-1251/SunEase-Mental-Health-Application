@@ -3,6 +3,9 @@
 //Generic Text
 const String tLogin = "Login";
 const String tSignup = "Signup";
+const String tUserName = "User Name";
+const String tEmail = "E-Mail";
+const String tPassword = "Password";
 
 //Splash Screen Text
 const String tAppName = "CalmU";
@@ -19,3 +22,17 @@ const String tOnBoardingCounter2 = "2/2";
 //Welcome Screen Text
 const String tWelcomeTitle = "Calm Down and Relax";
 const String tWelcomeSubTitle = "Slow down and get some rest time";
+
+//Login Screen Text
+const String tLoginTitle = "Welcome back,";
+const String tLoginSubTitle = "you\'ve been missed!";
+const String tNotAMember = "Not A Member?";
+const String tRegisterNow = "Register Now";
+const String tForgotPassword = "Forgot Password?";
+
+//SignUp Screen Text
+const String tSignUpTitle = "Get On Board！";
+const String tSignUpSubTitle = "Create an account to start your journey.";
+const String tAlreadyHaveAccount = "Already have an account?"; 
+const String tLoginNow = "Login Now";
+//const String tConfirmPassword = "Confirm Password";

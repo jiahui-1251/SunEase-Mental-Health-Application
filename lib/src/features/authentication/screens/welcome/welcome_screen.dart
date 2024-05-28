@@ -5,6 +5,8 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
+import 'package:fyp/src/features/authentication/screens/signup/signup_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -39,18 +41,17 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Expanded( //Expanded class resize widget dynamically
                   child: OutlinedButton(
-                    onPressed: (){
-                      Get.to(LoginOrRegisterPage());
-                    }, 
+                    onPressed: () => Get.to(() => const LoginScreen()),
+                    // {
+                    //   Get.to(LoginOrRegisterPage());
+                    // }, 
                     child: Text(tLogin.toUpperCase())
                   ),
                 ),
                 SizedBox(width: 10.0,),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: (){
-                      Get.to(LoginOrRegisterPage());
-                    }, 
+                    onPressed: () => Get.to(() => const SignUpScreen()),
                     child: Text(tSignup.toUpperCase())
                     ),
                 ),

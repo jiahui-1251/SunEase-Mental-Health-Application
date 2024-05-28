@@ -8,8 +8,9 @@ class TElevatedButtonTheme {
   static final lightElevatedButtonTheme =ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       //shape：RoundedRectangleBorder(),
-      foregroundColor: tOrangeColor,
-      side:BorderSide(color: tOrangeColor),
+      foregroundColor: tWhiteColor,
+      backgroundColor: tBlackColor,
+      side:BorderSide(color: tBlackColor),
       //side:BorderSide(color: tSecondaryColor),
       padding: EdgeInsets.symmetric(vertical: tButtonHeight),
     ),

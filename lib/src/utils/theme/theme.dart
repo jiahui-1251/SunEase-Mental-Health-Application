@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/utils/theme/widget_themes/elevated_button_theme.dart';
 import 'package:fyp/src/utils/theme/widget_themes/outlined_button_theme.dart';
+import 'package:fyp/src/utils/theme/widget_themes/text_button_theme.dart';
+import 'package:fyp/src/utils/theme/widget_themes/text_field_theme.dart';
 import 'package:fyp/src/utils/theme/widget_themes/text_theme.dart';
 
 class TAppTheme {
@@ -13,6 +15,8 @@ class TAppTheme {
         textTheme: TTextTheme.lightTextTheme,
         outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
         elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+        textButtonTheme: TTextButtonTheme.TextButtonTheme,
+        inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
         // elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom()),
         primarySwatch: MaterialColor(0xFFFFE200, <int, Color> {
           50: Color(0XFFFFF3E0),

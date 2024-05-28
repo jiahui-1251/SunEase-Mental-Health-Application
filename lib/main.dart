@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fyp/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fyp/src/constants/image_strings.dart';
+import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:fyp/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
+import 'package:fyp/src/features/authentication/screens/signup/signup_screen.dart';
 import 'package:fyp/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:fyp/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:fyp/src/utils/theme/theme.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: TAppTheme.lightTheme,
       themeMode: ThemeMode.system,
-      home: SplashScreen(),
+      home: SignUpScreen(),
     );
   }
 }

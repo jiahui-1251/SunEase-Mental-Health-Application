@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
+import 'package:fyp/src/constants/sizes.dart';
 
 class TTextFormFieldTheme {
   TTextFormFieldTheme._();
@@ -13,6 +14,6 @@ class TTextFormFieldTheme {
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(width: 2.0, color: tOrangeColor),
       ),
-      contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+      contentPadding: EdgeInsets.all(tDefaultSize-15),
       );
 }

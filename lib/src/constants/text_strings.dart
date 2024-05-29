@@ -6,6 +6,7 @@ const String tSignup = "Signup";
 const String tUserName = "User Name";
 const String tEmail = "E-Mail";
 const String tPassword = "Password";
+const String tNext = "Next";
 
 //Splash Screen Text
 const String tAppName = "CalmU";

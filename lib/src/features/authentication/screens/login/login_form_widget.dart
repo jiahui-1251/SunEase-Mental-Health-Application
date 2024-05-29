@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_mail.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -50,7 +53,7 @@ class LoginForm extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const ForgetPasswordScreen()),
                 child: Text(tForgotPassword),
               ),
             ),

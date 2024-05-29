@@ -3,6 +3,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_mail.dart';
+import 'package:fyp/src/features/authentication/screens/widgets/navigation_menu.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -60,7 +61,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: (){}, 
+                onPressed: ()=> Get.to(() => const NavigationMenu()), 
                 child: Text(tLogin.toUpperCase()),
               ),
             ),

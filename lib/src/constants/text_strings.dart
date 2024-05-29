@@ -41,3 +41,8 @@ const String tLoginNow = "Login Now";
 //Forgot Password Text
 const String tForgotPasswordTitle = "Forgot Password";
 const String tForgotPasswordSubTitle = "Enter your registered E-Mail to receive OTP";
+
+//OTP Screen
+const String tOtpTitle = "OTP";
+const String tOtpSubtitle = "Verification";
+const String tOtpMessage = "Enter the verification code sent at ";

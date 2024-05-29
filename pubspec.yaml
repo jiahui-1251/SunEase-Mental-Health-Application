@@ -40,6 +40,8 @@ dependencies:
   get: ^4.6.5
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.0+2
+  flutter_otp_text_field: ^1.1.3+2
+  iconsax_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_lints: ^4.0.0

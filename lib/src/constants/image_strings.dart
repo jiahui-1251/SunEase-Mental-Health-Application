@@ -12,3 +12,6 @@ const String tWelcomeImage = "assets/images/welcome_images/welcome_image.png";
 
 //Forget Password screens
 const String tForgetPasswordImage = "assets/images/forget_password/forget-password.png";
+
+//Profile screen
+const String tProfileImage = "assets/images/profile_images/profile_icon.png";

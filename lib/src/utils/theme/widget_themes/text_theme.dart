@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TTextTheme {
@@ -13,6 +14,11 @@ class TTextTheme {
             color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 30,
+          ),
+          titleSmall: GoogleFonts.poppins(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
           bodyLarge: GoogleFonts.poppins(
             color: Colors.black,

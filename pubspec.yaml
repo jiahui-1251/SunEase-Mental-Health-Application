@@ -30,18 +30,34 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  
+
+  ## FIREBASE PACKAGES
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.8
+
+  ## GOOGLE FONT AND SIGN IN
   google_sign_in: ^6.2.1
-  logger: ^2.3.0
   google_fonts: 5.1.0
+
+  ## DEBUG LOG PRINT
+  logger: ^2.3.0
+  
+  ## SPLASH SCREEN AND STATE MANAGEMENT
   flutter_native_splash: ^2.3.10
   get: ^4.6.5
+
+  ## ONBOARDING PACKAGES  
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.0+2
+
+  ## OTP TEXT FIELD
   flutter_otp_text_field: ^1.1.3+2
+
+  ## ICONS
   iconsax_flutter: ^1.0.0
+  cupertino_icons: ^1.0.2
+  line_awesome_flutter: ^3.0.1
 
 dev_dependencies:
   flutter_lints: ^4.0.0
@@ -87,6 +103,7 @@ flutter:
     - assets/images/on_boarding_images/
     - assets/images/splash_images/
     - assets/images/forget_password/
+    - assets/images/profile_images/
     - assets/images/
     - assets/fonts/
     - assets/md_file/

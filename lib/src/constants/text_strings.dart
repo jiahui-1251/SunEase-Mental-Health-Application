@@ -46,3 +46,21 @@ const String tForgotPasswordSubTitle = "Enter your registered E-Mail to receive 
 const String tOtpTitle = "OTP";
 const String tOtpSubtitle = "Verification";
 const String tOtpMessage = "Enter the verification code sent at ";
+
+//Profile Screen
+const String tProfile = "Profile";
+const String tEditProfile = "Edit Profile";
+const String tLogout = "Logout";
+const String tProfileHeadingUserName = "User1";
+const String tProfileSubHeadingEmail = "user1@gmail.com";
+//Profile Menu
+const String tMenu1Settings = "Settings";
+const String tMenu2Notifications = "Notifications";
+const String tMenu3Feedback = "Feedback";
+const String tMenu4PrivacyPolilcy = "Privacy Policy";
+const String tMenu5Logout = "Logout";
+
+//Update Profile Screen
+const String tDelete = "Delete";
+const String tJoined = "Joined";
+const String tJoinedDate = " 30 May 2024";

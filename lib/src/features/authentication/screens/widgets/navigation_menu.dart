@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/src/features/authentication/screens/profile/profile_screen.dart';
+import 'package:fyp/src/features/authentication/screens/forum/forum_screen.dart';
+import 'package:fyp/src/features/authentication/screens/meditation/meditation_screen.dart';
+import 'package:fyp/src/features/authentication/screens/profile/profile_screen_menu.dart';
+import 'package:fyp/src/features/authentication/screens/resources/resources_screen.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -46,9 +49,9 @@ class NavigationController extends GetxController {
   final RxInt selectedIndex = 0.obs; // Set default to 0 if you want the first screen to be shown initially
 
   final screens = [
-    const HomeScreen(),
-    Container(color: Colors.purple),
-    Container(color: Colors.orange),
-    Container(color: Colors.blue),
+    const ResourcesScreen(),
+    const MeditationScreen(),
+    const ForumScreen(),
+    const ProfileScreenMenu(),
   ];
 }

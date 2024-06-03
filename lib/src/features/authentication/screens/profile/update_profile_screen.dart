@@ -3,6 +3,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -13,16 +14,7 @@ class UpdateProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(LineAwesomeIcons.angle_left_solid),
-          ),
-          title: Text(
-            tEditProfile,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-        ),  
+        appBar: PageTitleWidget(title: tEditProfile),  
         body: SingleChildScrollView(
           child: Container(
           padding: const EdgeInsets.all(tDefaultSize-20),

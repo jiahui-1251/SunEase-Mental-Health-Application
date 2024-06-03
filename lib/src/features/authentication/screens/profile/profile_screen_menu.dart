@@ -4,8 +4,10 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/screens/profile/profile_screen_menu_widget.dart';
+import 'package:fyp/src/features/authentication/screens/profile/widgets/profile_screen_menu_widget.dart';
+import 'package:fyp/src/features/authentication/screens/profile/profile_settings.dart';
 import 'package:fyp/src/features/authentication/screens/profile/update_profile_screen.dart';
+import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -17,16 +19,7 @@ class ProfileScreenMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(LineAwesomeIcons.angle_left_solid),
-          ),
-          title: Text(
-            tProfile,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-        ),
+        appBar: PageTitleWidget(title: tProfile),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize-20),
@@ -87,11 +80,11 @@ class ProfileScreenMenu extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // MENU
-                ProfileMenuWidget(title: "Settings", icon:LineAwesomeIcons.cog_solid, onPress: (){}),
-                ProfileMenuWidget(title: "Feedback", icon:LineAwesomeIcons.sticky_note, onPress: (){}),
-                ProfileMenuWidget(title: "Notifications", icon:LineAwesomeIcons.bell_solid, onPress: (){}),
+                ProfileMenuWidget(title: tMenu1Settings, icon:LineAwesomeIcons.cog_solid, onPress: () => Get.to(()=> ProfileSettingsScreen())),
+                ProfileMenuWidget(title: tMenu2Help, icon:LineAwesomeIcons.hands_helping_solid, onPress: (){}),
+                ProfileMenuWidget(title: tMenu3Notifications, icon:LineAwesomeIcons.bell_solid, onPress: (){}),
                 const Divider(),
-                ProfileMenuWidget(title: "Logout", icon:LineAwesomeIcons.sign_out_alt_solid, onPress: (){}, endIcon: false),
+                ProfileMenuWidget(title: tLogout, icon:LineAwesomeIcons.sign_out_alt_solid, onPress: (){}, endIcon: false),
                 ProfileMenuWidget(
                   title: "Delete account", 
                   icon:LineAwesomeIcons.sign_out_alt_solid, 

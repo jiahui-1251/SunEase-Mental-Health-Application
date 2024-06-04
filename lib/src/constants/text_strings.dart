@@ -66,3 +66,15 @@ const String tJoinedDate = " 30 May 2024";
 
 //Setting Screen
 const String tPrivacyPolilcy = "Privacy Policy";
+
+//Meditation Screen
+const String tMeditation = "Meditation";
+
+//Resources Screen
+const String tResources = "Resources";
+
+//Daily Challenges Screen
+const String tDailyChallenges = "Daily Challenges";
+
+//Forum Screen
+const String tForum = "Forum";

@@ -7,9 +7,11 @@ class PageTitleWidget extends StatelessWidget implements PreferredSizeWidget{
   const PageTitleWidget({
     super.key,
     required this.title,
+    this.backgroundColor,
   });
 
   final String title;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class PageTitleWidget extends StatelessWidget implements PreferredSizeWidget{
         title,
         style: Theme.of(context).textTheme.titleSmall,
       ),
+      backgroundColor: backgroundColor,
     );
   }
   

@@ -78,3 +78,4 @@ const String tDailyChallenges = "Daily Challenges";
 
 //Forum Screen
 const String tForum = "Forum";
+const String tForumSubTitle = "Find topic that you like to read!";

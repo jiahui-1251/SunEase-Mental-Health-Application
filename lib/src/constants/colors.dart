@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 const tOrangeColor = Color(0XFFF57C00);
 const tYellowColor = Color(0XFFFBECB2);
-const tGreyColor = Color(0xFFF6F1E9);
+const tGreyColor = Color(0xFFC2C0C0);
 const tBlackColor = Colors.black;
 const tWhiteColor = Colors.white;
 

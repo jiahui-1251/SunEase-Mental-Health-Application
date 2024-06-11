@@ -37,6 +37,7 @@ const String tSignUpTitle = "Get On Board！";
 const String tSignUpSubTitle = "Create an account to start your journey.";
 const String tAlreadyHaveAccount = "Already have an account?"; 
 const String tLoginNow = "Login Now";
+const String tConfirmPassword = "Confirm Password";
 //const String tConfirmPassword = "Confirm Password";
 
 //Forgot Password Text

@@ -3,23 +3,47 @@ import 'package:fyp/src/common_widgets/form/privacy_policy.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/features/authentication/controllers/signup_controllers.dart';
+import 'package:get/get.dart';
 
-class SignUpFormWidget extends StatelessWidget {
-  const SignUpFormWidget({
-    super.key,
-  });
+class SignUpFormWidget extends StatefulWidget {
+  const SignUpFormWidget({super.key});
+
+  @override
+  _SignUpFormWidgetState createState() => _SignUpFormWidgetState();
+}
+
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+  final _formKey = GlobalKey<FormState>();
+  final controller = Get.put(SignUpController());
+
+  final FocusNode userNameFocusNode = FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+  final FocusNode confirmPasswordFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    userNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    confirmPasswordFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: tFormHeight -20),
+      padding: const EdgeInsets.symmetric(vertical: tFormHeight - 20),
       child: Form(
+        key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-    
-            //User Name
+            // User Name
             TextFormField(
+              focusNode: userNameFocusNode,
+              controller: controller.userName,
               decoration: const InputDecoration(
                 label: Text(tUserName),
                 prefixIcon: Icon(
@@ -27,13 +51,22 @@ class SignUpFormWidget extends StatelessWidget {
                   color: tOrangeColor,
                 ),
                 labelStyle: TextStyle(color: tBlackColor),
-              )
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your username';
+                }
+                return null;
+              },
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(emailFocusNode);
+              },
             ),
-    
             const SizedBox(height: tFormHeight - 20),
-    
-            //Email
+            // Email
             TextFormField(
+              focusNode: emailFocusNode,
+              controller: controller.email,
               decoration: const InputDecoration(
                 label: Text(tEmail),
                 prefixIcon: Icon(
@@ -41,13 +74,22 @@ class SignUpFormWidget extends StatelessWidget {
                   color: tOrangeColor,
                 ),
                 labelStyle: TextStyle(color: tBlackColor),
-              )
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(passwordFocusNode);
+              },
             ),
-    
-            const SizedBox(height: tFormHeight - 20),                        
-    
-            //Password 
+            const SizedBox(height: tFormHeight - 20),
+            // Password
             TextFormField(
+              focusNode: passwordFocusNode,
+              controller: controller.password,
               obscureText: true,
               decoration: const InputDecoration(
                 label: Text(tPassword),
@@ -56,25 +98,58 @@ class SignUpFormWidget extends StatelessWidget {
                   color: tOrangeColor,
                 ),
                 labelStyle: TextStyle(color: tBlackColor),
-              )
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(confirmPasswordFocusNode);
+              },
             ),
-    
+
+            const SizedBox(height: tFormHeight - 20),
+            
+            // Confirm Password
+            TextFormField(
+              focusNode: confirmPasswordFocusNode,
+              controller: controller.confirmPassword,
+              obscureText: true,
+              decoration: const InputDecoration(
+                label: Text(tConfirmPassword),
+                prefixIcon: Icon(
+                  Icons.fingerprint_outlined,
+                  color: tOrangeColor,
+                ),
+                labelStyle: TextStyle(color: tBlackColor),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please confirm your password';
+                }
+                return null;
+              },
+            ),
             const SizedBox(height: tFormHeight - 30),
-
-            //Privacy Policy
+            // Privacy Policy
             PrivayPolicy(),
-
-            //SignUp Button
+            // SignUp Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: (){}, 
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    controller.signUserUp(context);
+                  }
+                },
                 child: Text(tSignup.toUpperCase()),
               ),
             ),
-          ]
-        )
-      )
+          ],
+        ),
+      ),
     );
   }
 }

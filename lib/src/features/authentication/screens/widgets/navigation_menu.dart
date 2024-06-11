@@ -46,7 +46,7 @@ class NavigationMenu extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
-  final RxInt selectedIndex = 0.obs; // Set default to 0 if you want the first screen to be shown initially
+  final RxInt selectedIndex = 3.obs; // Set default to 0 if you want the first screen to be shown initially
 
   final screens = [
     const ResourcesScreen(),

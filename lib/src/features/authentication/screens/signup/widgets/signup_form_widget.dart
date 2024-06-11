@@ -147,9 +147,9 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                       password: controller.password.text.trim(),
                       UserName: controller.userName.text.trim(),
                     );
-                    SignUpController.instance.createUser(user, context);
+                    // SignUpController.instance.createUser(user, context);
 
-                    // controller.signUserUp(context);
+                    controller.signUserUp(context);
                   }
                 },
                 child: Text(tSignup.toUpperCase()),

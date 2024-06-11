@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
 
-  //TextField Controllers to get data from TextFields
+  // TextField Controllers to get data from TextFields
   final email = TextEditingController();
   final password = TextEditingController();
   final userName = TextEditingController();
@@ -16,17 +16,12 @@ class SignUpController extends GetxController {
 
   final userRepo = Get.put(UserRepository());
 
-  Future <void> createUser(UserModel user, BuildContext context) async {
-    await userRepo.createUser(user);
-    signUserUp(context);
-  }
-
   void signUserUp(BuildContext context) async {
     // Show loading circle
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(
             color: Colors.orange,
           ),
@@ -42,28 +37,36 @@ class SignUpController extends GetxController {
           email: email.text,
           password: password.text,
         );
-        
-        // Create UserModel instance
-        UserModel newUser = UserModel(
-          UserID: userCredential.user?.uid,
-          UserName: userName.text,
-          email: email.text,
-          password: password.text,
-        );
 
-        // Store user data in Firestore
-        // await UserRepository.instance.createUser(newUser);
+        // Retrieve the user ID
+        String? userId = userCredential.user?.uid;
 
-        Navigator.pop(context); // Pop the loading circle
+        if (userId != null) {
+          // Create UserModel instance with User UID
+          UserModel newUser = UserModel(
+            UserID: userId,
+            UserName: userName.text,
+            email: email.text,
+            password: password.text,
+          );
 
-        Get.to(() => LoginScreen());
+          // Store user data in Firestore
+          await userRepo.createUser(newUser);
+
+          Navigator.pop(context); // Pop the loading circle
+
+          Get.to(() => const LoginScreen());
+        } else {
+          Navigator.pop(context); // Pop the loading circle
+          showErrorMessage(context, "Failed to retrieve user ID");
+        }
       } else {
         // Show error message, passwords don't match
         Navigator.pop(context); // Pop the loading circle
         showErrorMessage(context, "Passwords don't match");
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context); 
+      Navigator.pop(context);
       // Show error message
       showErrorMessage(context, e.message ?? "Unknown error occurred");
     }

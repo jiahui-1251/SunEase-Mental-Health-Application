@@ -62,7 +62,7 @@ class ForumScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        'Categories', 
+                        tCategory,
                         style: Theme.of(context).textTheme.titleSmall, 
                         maxLines: 1, 
                         overflow: TextOverflow.ellipsis
@@ -90,6 +90,27 @@ class ForumScreen extends StatelessWidget {
                         },
                       ),
                     ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        tTrendingPost,
+                        style: Theme.of(context).textTheme.titleSmall, 
+                        maxLines: 1, 
+                        overflow: TextOverflow.ellipsis
+                      ),
+                    ),
+                    
+                    const SizedBox(height: tFormHeight - 20),
+
+                    Container(
+                      decoration: BoxDecoration(
+                        color: tGreyColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      
+                    )
+
                   ],
                 ),
               ),

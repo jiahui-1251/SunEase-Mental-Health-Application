@@ -14,7 +14,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileScreenMenu extends StatelessWidget {
   const ProfileScreenMenu({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(

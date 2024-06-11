@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:fyp/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fyp/src/constants/image_strings.dart';
+import 'package:fyp/src/features/authentication/controllers/signup_controllers.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_mail.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
+import 'package:fyp/src/features/authentication/screens/forum/forum_screen.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:fyp/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 import 'package:fyp/src/features/authentication/screens/signup/signup_screen.dart';
 import 'package:fyp/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:fyp/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/navigation_menu.dart';
+import 'package:fyp/src/repository/user_repository/user_repository.dart';
 import 'package:fyp/src/utils/theme/theme.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'firebase_options.dart';
@@ -20,6 +25,9 @@ void main() async {
   await Firebase.initializeApp( //initialize Firebase App before using firebase service
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  Get.put(UserRepository());
+  Get.put(SignUpController());
   runApp(const MyApp());
 }
 

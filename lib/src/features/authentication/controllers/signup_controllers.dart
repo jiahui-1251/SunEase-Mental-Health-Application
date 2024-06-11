@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp/src/features/authentication/models/user_model.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
+import 'package:fyp/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -13,6 +13,13 @@ class SignUpController extends GetxController {
   final password = TextEditingController();
   final userName = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
+
+  final userRepo = Get.put(UserRepository());
+
+  Future <void> createUser(UserModel user, BuildContext context) async {
+    await userRepo.createUser(user);
+    signUserUp(context);
+  }
 
   void signUserUp(BuildContext context) async {
     // Show loading circle
@@ -31,13 +38,25 @@ class SignUpController extends GetxController {
     try {
       // Check if password is confirmed
       if (password.text == confirmPassword.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text,
           password: password.text,
         );
+        
+        // Create UserModel instance
+        UserModel newUser = UserModel(
+          UserID: userCredential.user?.uid,
+          UserName: userName.text,
+          email: email.text,
+          password: password.text,
+        );
+
+        // Store user data in Firestore
+        // await UserRepository.instance.createUser(newUser);
+
         Navigator.pop(context); // Pop the loading circle
 
-        Get.to(LoginScreen());
+        Get.to(() => LoginScreen());
       } else {
         // Show error message, passwords don't match
         Navigator.pop(context); // Pop the loading circle

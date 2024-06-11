@@ -9,6 +9,8 @@ const tYellowColor = Color(0XFFFBECB2);
 const tGreyColor = Color(0xFFC2C0C0);
 const tBlackColor = Colors.black;
 const tWhiteColor = Colors.white;
+const tGreenColor = Colors.green;
+const tRedColor = Colors.red;
 
 //onBoarding Page Colors
 const tOnBoardingPage1Color = Colors.white;

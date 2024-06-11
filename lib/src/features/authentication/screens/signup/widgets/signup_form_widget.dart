@@ -4,6 +4,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/controllers/signup_controllers.dart';
+import 'package:fyp/src/features/authentication/models/user_model.dart';
 import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatefulWidget {
@@ -141,7 +142,14 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    controller.signUserUp(context);
+                    final user = UserModel(
+                      email: controller.email.text.trim(),
+                      password: controller.password.text.trim(),
+                      UserName: controller.userName.text.trim(),
+                    );
+                    SignUpController.instance.createUser(user, context);
+
+                    // controller.signUserUp(context);
                   }
                 },
                 child: Text(tSignup.toUpperCase()),

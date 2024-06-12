@@ -12,6 +12,7 @@ import 'package:fyp/src/features/authentication/screens/signup/signup_screen.dar
 import 'package:fyp/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:fyp/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/navigation_menu.dart';
+import 'package:fyp/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:fyp/src/repository/user_repository/user_repository.dart';
 import 'package:fyp/src/utils/theme/theme.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,7 @@ void main() async {
   await Firebase.initializeApp( //initialize Firebase App before using firebase service
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  Get.put(AuthenticationRepository());
   Get.put(UserRepository());
   Get.put(SignUpController());
   runApp(const MyApp());

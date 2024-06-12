@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/screens/profile/profile_screen_menu.dart';
 import 'package:fyp/src/features/authentication/screens/welcome/welcome_screen.dart';
+import 'package:fyp/src/features/authentication/screens/widgets/navigation_menu.dart';
 import 'package:fyp/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:get/get.dart';
 
@@ -21,13 +22,13 @@ class AuthenticationRepository extends GetxController {
 
   _setInitialScreen(User? user){
     //offAll - remove previous screen
-    user == null ? Get.offAll(()=> const WelcomeScreen()) : Get.offAll(() => const ProfileScreenMenu());
+    user == null ? Get.offAll(()=> const WelcomeScreen()) : Get.offAll(() => const NavigationMenu());
   }
 
   Future<void> createUserWithEmailAndPassword(String email, String password) async{
     try{
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      firebaseUser.value != null? Get.offAll(()=> const ProfileScreenMenu()): Get.to(()=> WelcomeScreen());
+      firebaseUser.value != null? Get.offAll(()=> const NavigationMenu()): Get.to(()=> WelcomeScreen());
     } on FirebaseAuthException catch(e){
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       print('FIREBASE AUTH EXCEPTION - ${ex.message}');

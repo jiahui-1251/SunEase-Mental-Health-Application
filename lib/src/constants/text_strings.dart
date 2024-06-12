@@ -73,6 +73,9 @@ const String tMeditation = "Meditation";
 
 //Resources Screen
 const String tResources = "Resources";
+const String tXMUMCounselling = "XMUM Counselling Booking Form";
+const String tOnlineResources = "ONLINE RESOURCES";
+const String tPhysicalResources = "PHYSICAL RESOURCES";
 
 //Daily Challenges Screen
 const String tDailyChallenges = "Daily Challenges";
@@ -82,4 +85,5 @@ const String tForum = "Forum";
 const String tForumSubTitle = "Find topic that you like to read!";
 const String tCategory = "Categories";
 const String tTrendingPost = "Trending Posts";
+
 

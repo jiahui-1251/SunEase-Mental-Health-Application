@@ -67,6 +67,7 @@ class ResourcesScreen extends StatelessWidget {
                         children: [
                           Text(
                             tOnlineResources,
+
                             style: Theme.of(context).textTheme.titleSmall,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -74,7 +75,10 @@ class ResourcesScreen extends StatelessWidget {
                           const SizedBox(height: 10), 
                           Text(
                             "1. The Malaysian Mental Health \nAssociation (MMHA)", 
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline, 
+                            ),
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 10), 
@@ -83,16 +87,75 @@ class ResourcesScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyLarge,
                             textAlign: TextAlign.left,
                           ),
+
+                          SizedBox(height: tFormHeight - 20),
+
+                          Text(
+                            "2. My Psycholog", 
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline, 
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 10), 
+                          Text(
+                            "Phone: +6011-3344 5270\nWebsite: www.mypsychology.my/", 
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.left,
+                          ),
+
+                          SizedBox(height: tFormHeight - 20),
+                          
+                          Text(
+                            "3. Be Frienders", 
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline, 
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 10), 
+                          Text(
+                            "Phone: +603-76272929 \nWebsite: www.befrienders.org.my/", 
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.left,
+                          )
                         ],
                       ),
                     ),
+
+                    const SizedBox(height: tFormHeight - 20),
                     Padding(
                       padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        tPhysicalResources,
-                        style: Theme.of(context).textTheme.titleSmall,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tCounsellingCentres,
+                            style: Theme.of(context).textTheme.titleSmall,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 10), 
+                          Text(
+                            "1. MentCouch Psychology Centre", 
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline, 
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 10), 
+                          Text(
+                            "Address: Suite 1-02, 1st Floor, Menara Atlan, 161B, Jalan Ampang, 50450 Kuala Lumpur", 
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.left,
+                          ),
+
+                          SizedBox(height: tFormHeight - 20),
+
+                        ],
                       ),
                     ),
                   ],

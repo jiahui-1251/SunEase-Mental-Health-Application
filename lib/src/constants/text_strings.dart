@@ -75,7 +75,7 @@ const String tMeditation = "Meditation";
 const String tResources = "Resources";
 const String tXMUMCounselling = "XMUM Counselling Booking Form";
 const String tOnlineResources = "ONLINE RESOURCES";
-const String tPhysicalResources = "PHYSICAL RESOURCES";
+const String tCounsellingCentres = "COUNSELLING CENTRES";
 
 //Daily Challenges Screen
 const String tDailyChallenges = "Daily Challenges";

@@ -60,6 +60,31 @@ class UpdateProfileScreen extends StatelessWidget {
                         const SizedBox(height: 50),
                         Form(child: Column(
                           children: [
+                                                        // User ID
+                            TextFormField(
+                              initialValue: userData.UserID,
+                              decoration: const InputDecoration(
+                                label: Text('User ID'),
+                                prefixIcon: Icon(
+                                  Icons.perm_identity,
+                                  color: tOrangeColor,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                                  borderSide: BorderSide(color: tOrangeColor),
+                                ),
+                                labelStyle: TextStyle(color: tBlackColor),
+                              ),
+                              enabled: false, // Make this field read-only
+                            ),
+                            const SizedBox(height: tFormHeight - 20),
+
+                            //UserName
                             TextFormField(
                               initialValue: userData.UserName,
                               decoration: const InputDecoration(

@@ -27,6 +27,12 @@ class UpdateProfileScreen extends StatelessWidget {
                 if(snapshot.connectionState == ConnectionState.done){
                   if(snapshot.hasData){
                     UserModel userData = snapshot.data as UserModel;
+
+                    //Controllers
+                    final Email = TextEditingController(text: userData.email);
+                    final Password = TextEditingController(text: userData.password);
+                    final UserName = TextEditingController(text: userData.UserName);
+
                     return Column(
                       children: [
                         Stack(
@@ -86,7 +92,8 @@ class UpdateProfileScreen extends StatelessWidget {
 
                             //UserName
                             TextFormField(
-                              initialValue: userData.UserName,
+                              controller: UserName,
+                              // initialValue: userData.UserName,
                               decoration: const InputDecoration(
                                 label: Text(tUserName),
                                 prefixIcon: Icon(
@@ -110,7 +117,8 @@ class UpdateProfileScreen extends StatelessWidget {
                     
                             //Email
                             TextFormField(
-                              initialValue: userData.email,
+                              controller: Email,
+                              // initialValue: userData.email,
                               decoration: const InputDecoration(
                                 label: Text(tEmail),
                                 prefixIcon: Icon(
@@ -134,7 +142,8 @@ class UpdateProfileScreen extends StatelessWidget {
                     
                             //Password 
                             TextFormField(
-                              initialValue: userData.password,
+                              controller: Password,
+                              // initialValue: userData.password,
                               obscureText: true,
                               decoration: const InputDecoration(
                                 label: Text(tPassword),
@@ -160,7 +169,16 @@ class UpdateProfileScreen extends StatelessWidget {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                            onPressed: () => Get.to(()=> UpdateProfileScreen()),
+                            onPressed: () async {
+                              final userDataNew = UserModel (
+                                UserID: userData.UserID,
+                                email: Email.text.trim(),
+                                password: Password.text.trim(),
+                                UserName: UserName.text.trim(),
+                              );
+
+                              await controller.updateRecord(userDataNew);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: tOrangeColor,
                               padding: const EdgeInsets.symmetric(vertical: 10)
@@ -176,18 +194,19 @@ class UpdateProfileScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text.rich(
-                              TextSpan(
-                                text: tJoined,
-                                style: TextStyle(fontSize: 12),
-                                children: [
-                                  TextSpan(
-                                    text: tJoinedDate,
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)
-                                  ),
-                                ],
-                              ),
-                            ),
+                            //Joined date
+                            // Text.rich(
+                            //   TextSpan(
+                            //     text: tJoined,
+                            //     style: TextStyle(fontSize: 12),
+                            //     children: [
+                            //       TextSpan(
+                            //         text: tJoinedDate,
+                            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                     
                             ElevatedButton(
                               onPressed: (){}, 

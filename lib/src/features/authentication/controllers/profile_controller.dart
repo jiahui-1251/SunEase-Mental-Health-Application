@@ -8,11 +8,6 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
-  //Controllers
-  final email = TextEditingController();
-  final password = TextEditingController();
-  final Name = TextEditingController();
-
   //Repositories
   final _authRepo = Get.find<AuthenticationRepository>();
   final _userRepo = Get.find<UserRepository>();
@@ -31,5 +26,9 @@ class ProfileController extends GetxController {
 
   //Fetch List of user repositories
   Future<List<UserModel>> getAllUsers() async => await _userRepo.allUser();
+
+  updateRecord(UserModel user) async {
+    await _userRepo.updateUserRecord(user);
+  }
 
 }

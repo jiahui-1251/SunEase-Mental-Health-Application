@@ -98,6 +98,7 @@ class ForumScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    
                     PostWidget(),
                     PostWidget(),
                     PostWidget(),

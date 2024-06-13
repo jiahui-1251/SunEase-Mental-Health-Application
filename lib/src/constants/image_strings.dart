@@ -15,3 +15,9 @@ const String tForgetPasswordImage = "assets/images/forget_password/forget-passwo
 
 //Profile screen
 const String tProfileImage = "assets/images/profile_images/profile_icon.png";
+
+//Meditation screen
+const String tMeditationImage1 = "assets/images/meditation_images/meditation_image1.jpg";
+const String tMeditationImage2 = "assets/images/meditation_images/meditation_image2.jpg";
+const String tMeditationImage3 = "assets/images/meditation_images/meditation_image3.jpg";
+const String tMeditationImage4 = "assets/images/meditation_images/meditation_image4.jpg";

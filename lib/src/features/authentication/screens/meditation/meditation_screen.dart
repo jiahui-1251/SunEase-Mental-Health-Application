@@ -84,7 +84,10 @@ class MeditationScreen extends StatelessWidget {
 
               const SizedBox(height: tFormHeight - 20),
 
-              MeditationAudioWidget(),
+              MeditationAudioWidget(audioTitle: "Stress Relief", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage1),
+              MeditationAudioWidget(audioTitle: "Study and Focus", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage2,),
+              MeditationAudioWidget(audioTitle: "Sleep", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage3,),
+              
             ],
           ),
         ),

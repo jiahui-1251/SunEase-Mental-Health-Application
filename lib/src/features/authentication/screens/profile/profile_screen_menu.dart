@@ -3,8 +3,10 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/controllers/profile_controller.dart';
 import 'package:fyp/src/features/authentication/models/user_model.dart';
+import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:fyp/src/features/authentication/screens/profile/widgets/profile_screen_menu_widget.dart';
 import 'package:fyp/src/features/authentication/screens/profile/profile_settings.dart';
 import 'package:fyp/src/features/authentication/screens/profile/update_profile_screen.dart';
@@ -17,7 +19,9 @@ class ProfileScreenMenu extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
+    final profileController = Get.put(ProfileController());
+    final signUpController = Get.put(SignUpController()); // Initialize the SignUpController
+    
     return SafeArea(
       child: Scaffold(
         appBar: PageTitleWidget(title: tProfile),
@@ -25,7 +29,7 @@ class ProfileScreenMenu extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize - 20),
             child: FutureBuilder(
-              future: controller.getUserData(),
+              future: profileController.getUserData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
@@ -106,7 +110,10 @@ class ProfileScreenMenu extends StatelessWidget {
                         ProfileMenuWidget(
                           title: tLogout,
                           icon: LineAwesomeIcons.sign_out_alt_solid,
-                          onPress: () {},
+                          onPress: () async {
+                            await signUpController.signOut();
+                            Get.offAll(() => const LoginScreen());
+                          },
                           endIcon: false,
                         ),
                         ProfileMenuWidget(

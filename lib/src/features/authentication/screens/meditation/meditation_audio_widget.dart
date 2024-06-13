@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
-
+import 'package:fyp/src/constants/sizes.dart';
 
 class MeditationAudioWidget extends StatelessWidget {
   const MeditationAudioWidget({
     super.key,
-
+    required this.audioTitle,
+    required this.audioSubtitle,
+    required this.backgroundImages,
   });
 
+  final String audioTitle;
+  final String audioSubtitle;
+  final String backgroundImages;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Added vertical padding for top and bottom margins
       child: Container(
         width: size.width * 0.9,
         height: size.height * 0.3,
@@ -23,7 +28,7 @@ class MeditationAudioWidget extends StatelessWidget {
           color: tGreyColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(tMeditationImage1), 
+            image: AssetImage(backgroundImages),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.6),
@@ -32,11 +37,11 @@ class MeditationAudioWidget extends StatelessWidget {
           ),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min, 
+          mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
               flex: 1,
-              fit: FlexFit.loose, 
+              fit: FlexFit.loose,
               child: Align(
                 alignment: Alignment.topRight,
                 child: PopupMenuButton(
@@ -56,14 +61,14 @@ class MeditationAudioWidget extends StatelessWidget {
                 ),
               ),
             ),
-    
+
             // Second Row
             Flexible(
               flex: 2,
-              fit: FlexFit.loose, 
+              fit: FlexFit.loose,
               child: Container(),
             ),
-    
+
             // Third Row
             Flexible(
               flex: 2,
@@ -77,11 +82,11 @@ class MeditationAudioWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Stress Relief',
+                          audioTitle,
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         Text(
-                          '5 mins | beg.',
+                          audioSubtitle,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],

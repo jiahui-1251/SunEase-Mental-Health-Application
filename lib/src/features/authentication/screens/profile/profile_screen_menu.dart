@@ -20,7 +20,7 @@ class ProfileScreenMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.put(ProfileController());
-    final signUpController = Get.put(SignUpController()); // Initialize the SignUpController
+    final signUpController = Get.put(SignUpController());
     
     return SafeArea(
       child: Scaffold(

@@ -55,6 +55,15 @@ class PostWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
+                    'Post Title',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                            ),
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
                     'This is the content of the post which contains a long string with style of bodyLarge.',
                     style: Theme.of(context).textTheme.bodyLarge,
                     maxLines: 5,

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
 
@@ -20,7 +19,6 @@ class ForumPostRepository extends GetxController {
       return [];
     }
   }
-
 
   Future<void> createPost(ForumPostModel post) async {
     await _db.collection("ForumPost").add(post.toJson()).whenComplete(

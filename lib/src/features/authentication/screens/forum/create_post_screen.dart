@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
+import 'package:fyp/src/features/forum_post/models/forum_model.dart';
+import 'package:fyp/src/repository/forum_repository/forum_repository.dart';
+import 'package:get/get.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -31,12 +34,25 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     super.dispose();
   }
 
-  void _createPost() {
+  void _createPost() async {
     if (_formKey.currentState?.validate() ?? false) {
-      // Handle post creation logic here
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Post created successfully!'),
-      ));
+      final newPost = ForumPostModel(
+        Category: _selectedCategory!,
+        PostContent: _contentController.text,
+        PostDateTime: DateTime.now(),
+        PostTitle: _titleController.text,
+      );
+
+      await ForumPostRepository.instance.createPost(newPost);
+
+      // Clear the form after creating the post
+      _formKey.currentState?.reset();
+      setState(() {
+        _selectedCategory = null;
+      });
+
+      // Navigate back or show success message
+      Get.back();
     }
   }
 
@@ -69,13 +85,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         items: _categories.map((String category) {
                           return DropdownMenuItem<String>(
                             value: category,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width - 64, 
-                              child: Text(
-                                category,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                            child: Text(
+                              category,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           );
                         }).toList(),

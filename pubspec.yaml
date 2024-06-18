@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+  intl: ^0.18.0
 
   ## FIREBASE PACKAGES
   firebase_core: ^2.27.0

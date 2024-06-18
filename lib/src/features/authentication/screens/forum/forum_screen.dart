@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/common_widgets/custom_shapes/container/primary_header_container.dart';
-import 'package:fyp/src/constants/colors.dart';
-import 'package:fyp/src/constants/sizes.dart';
-import 'package:fyp/src/constants/text_strings.dart';
+import 'package:get/get.dart';
 import 'package:fyp/src/features/authentication/screens/forum/post_widget.dart';
+import 'package:fyp/src/features/forum_post/models/forum_model.dart';
+import 'package:fyp/src/features/forum_post/controllers/post_controller.dart';
+import 'package:fyp/src/constants/colors.dart';
+import 'package:fyp/src/constants/text_strings.dart';
+import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/vertical_image_text.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -30,6 +33,8 @@ class ForumScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostController postController = Get.find<PostController>();
+
     return SafeArea(
       child: Scaffold(
         appBar: PageTitleWidget(title: tForum, backgroundColor: tOrangeColor),
@@ -98,10 +103,24 @@ class ForumScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    
-                    PostWidget(),
-                    PostWidget(),
-                    PostWidget(),
+                    FutureBuilder<List<ForumPostModel>>(
+                      future: postController.getAllPosts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          // Print the error details in the console
+                          print("Error: ${snapshot.error}");
+                          return Center(child: Text("Error: ${snapshot.error}"));
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return Center(child: Text("No posts found."));
+                        } else {
+                          return Column(
+                            children: snapshot.data!.map((post) => PostWidget(post: post)).toList(),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),

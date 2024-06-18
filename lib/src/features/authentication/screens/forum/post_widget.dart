@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
+import 'package:fyp/src/features/forum_post/models/forum_model.dart';
+import 'package:intl/intl.dart';
 
 class PostWidget extends StatelessWidget {
+  final ForumPostModel post;
+
   PostWidget({
     super.key,
+    required this.post,
   });
+
+  // Define the timeAgo method
+  String timeAgo(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime);
+
+    if (difference.inDays > 8) {
+      return DateFormat('MM/dd/yyyy').format(dateTime);
+    } else if (difference.inDays >= 1) {
+      return '${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago';
+    } else if (difference.inHours >= 1) {
+      return '${difference.inHours} hour${difference.inHours > 1 ? 's' : ''} ago';
+    } else if (difference.inMinutes >= 1) {
+      return '${difference.inMinutes} minute${difference.inMinutes > 1 ? 's' : ''} ago';
+    } else {
+      return 'just now';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    const SizedBox(height: tFormHeight - 20);
     return Column(
       children: [
         IntrinsicHeight(
@@ -37,11 +59,11 @@ class PostWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Category Name',
+                            post.Category,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           Text(
-                            'Posted 2 hours ago',
+                            'Posted ${timeAgo(post.PostDateTime)}',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -50,21 +72,21 @@ class PostWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    '#12341afs',
+                    '#${post.PostID}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'Post Title',
+                    post.PostTitle,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                            ),
+                          fontWeight: FontWeight.bold,
+                        ),
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'This is the content of the post which contains a long string with style of bodyLarge.',
+                    post.PostContent,
                     style: Theme.of(context).textTheme.bodyLarge,
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
@@ -74,7 +96,6 @@ class PostWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
@@ -98,4 +119,3 @@ class PostWidget extends StatelessWidget {
     );
   }
 }
-

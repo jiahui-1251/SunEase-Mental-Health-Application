@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
     //     home: AuthPage()
     //   );
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: TAppTheme.lightTheme,
       themeMode: ThemeMode.system,
       defaultTransition: Transition.leftToRightWithFade,

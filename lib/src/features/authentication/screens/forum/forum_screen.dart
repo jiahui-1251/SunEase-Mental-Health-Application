@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/common_widgets/custom_shapes/container/primary_header_container.dart';
 import 'package:get/get.dart';
-import 'package:fyp/src/features/authentication/screens/forum/post_widget.dart';
+import 'package:fyp/src/features/authentication/screens/forum/widget/post_widget.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
 import 'package:fyp/src/features/forum_post/controllers/post_controller.dart';
 import 'package:fyp/src/constants/colors.dart';
@@ -24,7 +24,7 @@ final List<CategoryItem> categories = [
   CategoryItem(icon: Iconsax.book, title: 'Academic'),
   CategoryItem(icon: Iconsax.house, title: 'Family'),
   CategoryItem(icon: Iconsax.heart, title: 'Relationship'),
-  CategoryItem(icon: Iconsax.map, title: 'Self-exploration'),
+  CategoryItem(icon: Iconsax.map, title: 'Self-Exploration'),
   CategoryItem(icon: Iconsax.message_question, title: 'Others'),
 ];
 

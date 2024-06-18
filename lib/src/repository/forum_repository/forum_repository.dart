@@ -42,4 +42,22 @@ class ForumPostRepository extends GetxController {
       print(error.toString());
     });
   }
+
+  Future<void> toggleLike(String postId, bool isLiked, int currentLikeNum) async {
+    try {
+      if (isLiked) {
+        // Decrease like count
+        await _db.collection("ForumPost").doc(postId).update({
+          "LikeNum": currentLikeNum - 1,
+        });
+      } else {
+        // Increase like count
+        await _db.collection("ForumPost").doc(postId).update({
+          "LikeNum": currentLikeNum + 1,
+        });
+      }
+    } catch (e) {
+      print("Error toggling like: $e");
+    }
+  }
 }

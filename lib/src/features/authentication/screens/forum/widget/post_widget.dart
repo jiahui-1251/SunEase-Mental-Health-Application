@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
+import 'package:fyp/src/features/authentication/screens/forum/forum_screen.dart';
 import 'package:fyp/src/features/authentication/screens/forum/widget/expandable_text.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
+import 'package:fyp/src/repository/forum_repository/forum_repository.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
-class PostWidget extends StatelessWidget {
+class PostWidget extends StatefulWidget {
   final ForumPostModel post;
 
   PostWidget({
     Key? key,
     required this.post,
   }) : super(key: key);
+
+  @override
+  _PostWidgetState createState() => _PostWidgetState();
+}
+
+class _PostWidgetState extends State<PostWidget> {
+  late int likeNum;
+  bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    likeNum = widget.post.LikeNum ?? 0;
+  }
+
+  void _toggleLike() async {
+    await ForumPostRepository.instance.toggleLike(widget.post.PostID!, isLiked, likeNum);
+    setState(() {
+      if (isLiked) {
+        likeNum -= 1;
+      } else {
+        likeNum += 1;
+      }
+      isLiked = !isLiked;
+    });
+  }
 
   // Define the timeAgo method
   String timeAgo(DateTime dateTime) {
@@ -29,6 +59,15 @@ class PostWidget extends StatelessWidget {
     } else {
       return 'just now';
     }
+  }
+
+  IconData _getCategoryIcon(String category) {
+    for (CategoryItem item in categories) {
+      if (item.title.toLowerCase() == category.toLowerCase()) {
+        return item.icon;
+      }
+    }
+    return Iconsax.message_question; // Default icon if no match found
   }
 
   @override
@@ -54,19 +93,22 @@ class PostWidget extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: Colors.black,
-                        child: Icon(Icons.category, color: Colors.white),
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          _getCategoryIcon(widget.post.Category),
+                          color: Colors.black,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            post.Category,
+                            widget.post.Category,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           Text(
-                            'Posted ${timeAgo(post.PostDateTime)}',
+                            'Posted ${timeAgo(widget.post.PostDateTime)}',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -75,12 +117,12 @@ class PostWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    '#${post.PostID}',
+                    '#${widget.post.PostID}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    post.PostTitle,
+                    widget.post.PostTitle,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -88,7 +130,7 @@ class PostWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 5),
-                  ExpandableText(post.PostContent),
+                  ExpandableText(widget.post.PostContent),
                 ],
               ),
             ),
@@ -98,11 +140,13 @@ class PostWidget extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.favorite_border, color: tOrangeColor),
-                    onPressed: () {
-                      // Handle the like button press
-                    },
+                    icon: Icon(
+                      isLiked ? Icons.favorite : Icons.favorite_border,
+                      color: tOrangeColor,
+                    ),
+                    onPressed: _toggleLike,
                   ),
+                  Text('$likeNum', style: TextStyle(color: tOrangeColor)),
                   IconButton(
                     icon: Icon(Icons.comment, color: tOrangeColor),
                     onPressed: () {
@@ -119,4 +163,3 @@ class PostWidget extends StatelessWidget {
     );
   }
 }
-

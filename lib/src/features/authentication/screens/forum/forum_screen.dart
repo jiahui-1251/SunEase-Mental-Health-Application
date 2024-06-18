@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/common_widgets/custom_shapes/container/primary_header_container.dart';
+import 'package:fyp/src/features/authentication/screens/forum/create_post_screen.dart';
 import 'package:get/get.dart';
 import 'package:fyp/src/features/authentication/screens/forum/widget/post_widget.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
@@ -126,6 +127,13 @@ class ForumScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.to(() => CreatePostScreen());
+          },
+          backgroundColor: tOrangeColor,
+          child: Icon(Icons.add, color: Colors.white),
         ),
       ),
     );

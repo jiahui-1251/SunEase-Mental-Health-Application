@@ -31,7 +31,7 @@ class _ExpandableTextState extends State<ExpandableText> {
           ),
           if (!isExpanded)
             Align(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.centerLeft,
               child: Text(
                 '...more',
                 style: TextStyle(

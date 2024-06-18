@@ -85,5 +85,6 @@ const String tForum = "Forum";
 const String tForumSubTitle = "Find topic that you like to read!";
 const String tCategory = "Categories";
 const String tTrendingPost = "Trending Posts";
+const String tCreatePost = "Create New Post";
 
 

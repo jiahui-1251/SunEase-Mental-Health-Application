@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/features/authentication/screens/forum/forum_screen.dart';
 import 'package:fyp/src/features/authentication/screens/meditation/meditation_screen.dart';
 import 'package:fyp/src/features/authentication/screens/profile/profile_screen_menu.dart';
@@ -34,9 +35,7 @@ class NavigationMenu extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange,
-        child: Icon(Iconsax.calendar),
+      floatingActionButton: EllipticalFloatingActionButton(
         onPressed: () {
           controller.selectedIndex.value = 4;
         },
@@ -54,11 +53,11 @@ class NavigationMenu extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: controller.selectedIndex.value == index ? Colors.orange : Colors.grey),
+            Icon(icon, color: controller.selectedIndex.value == index ? tOrangeColor : tBlackColor),
             Text(
               label,
               style: TextStyle(
-                color: controller.selectedIndex.value == index ? Colors.orange : Colors.grey,
+                color: controller.selectedIndex.value == index ? tOrangeColor : tBlackColor,
               ),
             ),
           ],
@@ -87,5 +86,30 @@ class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
     final double fabX = (scaffoldGeometry.scaffoldSize.width - scaffoldGeometry.floatingActionButtonSize.width) / 2;
     final double fabY = scaffoldGeometry.scaffoldSize.height - scaffoldGeometry.floatingActionButtonSize.height - notchHeight - 40; // Adjust the height here
     return Offset(fabX, fabY);
+  }
+}
+
+class EllipticalFloatingActionButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const EllipticalFloatingActionButton({required this.onPressed, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 50, // Width of the ellipse
+        height: 50, // Height of the ellipse
+        decoration: BoxDecoration(
+          color: Colors.orange,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Center(
+          child: Icon(Iconsax.calendar, color: Colors.white),
+        ),
+      ),
+    );
   }
 }

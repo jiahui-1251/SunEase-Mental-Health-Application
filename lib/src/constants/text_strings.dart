@@ -78,7 +78,7 @@ const String tOnlineResources = "ONLINE RESOURCES";
 const String tCounsellingCentres = "COUNSELLING CENTRES";
 
 //Daily Challenges Screen
-const String tDailyChallenges = "Daily Challenges";
+const String tDaily = "Daily";
 
 //Forum Screen
 const String tForum = "Forum";

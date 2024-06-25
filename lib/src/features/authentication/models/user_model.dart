@@ -13,7 +13,7 @@ class UserModel {
     required this.password,
   });
 
-  toJson(){
+  Map<String, dynamic> toJson() {
     return {
       "UserID": UserID,
       "Email": email,

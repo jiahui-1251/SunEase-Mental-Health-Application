@@ -119,7 +119,9 @@ class ProfileScreenMenu extends StatelessWidget {
                         ProfileMenuWidget(
                           title: "Delete account",
                           icon: LineAwesomeIcons.sign_out_alt_solid,
-                          onPress: () {},
+                          onPress: () async {
+                            await signUpController.deleteAccount(context);
+                          },
                           endIcon: false,
                           textColor: Colors.red,
                         )

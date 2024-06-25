@@ -17,7 +17,6 @@ class SignUpController extends GetxController {
   final userRepo = Get.put(UserRepository());
 
   void signUserUp(BuildContext context) async {
-    // Show loading circle
     showDialog(
       context: context,
       builder: (context) {
@@ -29,20 +28,17 @@ class SignUpController extends GetxController {
       },
     );
 
-    // Try creating user
     try {
-      // Check if password is confirmed
       if (password.text == confirmPassword.text) {
+        print('Email: ${email.text}, Password: ${password.text}');
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text,
           password: password.text,
         );
 
-        // Retrieve the user ID
         String? userId = userCredential.user?.uid;
 
         if (userId != null) {
-          // Create UserModel instance with User UID
           UserModel newUser = UserModel(
             UserID: userId,
             UserName: userName.text,
@@ -50,27 +46,30 @@ class SignUpController extends GetxController {
             password: password.text,
           );
 
-          // Store user data in Firestore
           await userRepo.createUser(newUser);
 
-          Navigator.pop(context); // Pop the loading circle
+          Navigator.pop(context);
 
           Get.to(() => const LoginScreen());
         } else {
-          Navigator.pop(context); // Pop the loading circle
+          Navigator.pop(context);
           showErrorMessage(context, "Failed to retrieve user ID");
         }
       } else {
-        // Show error message, passwords don't match
-        Navigator.pop(context); // Pop the loading circle
+        Navigator.pop(context);
         showErrorMessage(context, "Passwords don't match");
       }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      // Show error message
       showErrorMessage(context, e.message ?? "Unknown error occurred");
+    } catch (e) {
+      Navigator.pop(context);
+      showErrorMessage(context, "An unexpected error occurred");
+      print(e); // Log any unexpected errors
     }
   }
+
+
 
   void showErrorMessage(BuildContext context, String message) {
     showDialog(
@@ -91,5 +90,24 @@ class SignUpController extends GetxController {
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+    Future<void> deleteAccount(BuildContext context) async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Delete user data from Firestore
+        await userRepo.deleteUser(user.uid);
+
+        // Delete user authentication
+        await user.delete();
+
+        // Redirect to login screen
+        Get.offAll(() => const LoginScreen());
+      }
+    } on FirebaseAuthException catch (e) {
+      showErrorMessage(context, e.message ?? "Unknown error occurred");
+    }
   }
 }

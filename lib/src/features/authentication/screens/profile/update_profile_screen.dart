@@ -175,6 +175,7 @@ class UpdateProfileScreen extends StatelessWidget {
                                 email: Email.text.trim(),
                                 password: Password.text.trim(),
                                 UserName: UserName.text.trim(),
+                                UserType: userData.UserType,
                               );
 
                               await controller.updateRecord(userDataNew);

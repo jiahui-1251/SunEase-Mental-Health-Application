@@ -5,12 +5,14 @@ class UserModel {
   final String UserName;
   final String email;
   final String password;
+  final String UserType;
 
   const UserModel({
     this.UserID,
     required this.UserName,
     required this.email,
     required this.password,
+    required this.UserType,
   });
 
   Map<String, dynamic> toJson() {
@@ -19,6 +21,7 @@ class UserModel {
       "Email": email,
       "UserName": UserName,
       "Password": password,
+      "UserType": UserType,
     };
   }
 
@@ -29,6 +32,7 @@ class UserModel {
       email: data["Email"],
       password: data["Password"],
       UserName: data["UserName"],
+      UserType: data["UserType"],
     );
   }
 }

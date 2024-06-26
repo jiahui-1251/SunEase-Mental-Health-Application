@@ -41,6 +41,47 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // User Type Dropdown
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                label: Text('User Type'),
+                prefixIcon: Icon(
+                  Icons.account_circle_outlined,
+                  color: tOrangeColor,
+                ),
+                labelStyle: TextStyle(color: tBlackColor),
+              ),
+              items: [
+                DropdownMenuItem(
+                  value: 'User',
+                  child: Text(
+                    'User',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                DropdownMenuItem(
+                  value: 'Counsellor',
+                  child: Text(
+                    'Counsellor',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ],
+              onChanged: (value) {
+                if (value != null) {
+                  controller.UserType.value = value;
+                }
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please select a user type';
+                }
+                return null;
+              },
+            ),
+
+            const SizedBox(height: tFormHeight - 20),
+            
             // User Name
             TextFormField(
               focusNode: userNameFocusNode,
@@ -63,7 +104,9 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 FocusScope.of(context).requestFocus(emailFocusNode);
               },
             ),
+
             const SizedBox(height: tFormHeight - 20),
+            
             // Email
             TextFormField(
               focusNode: emailFocusNode,
@@ -146,6 +189,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                       email: controller.email.text.trim(),
                       password: controller.password.text.trim(),
                       UserName: controller.userName.text.trim(),
+                      UserType: controller.UserType.value,
                     );
                     // SignUpController.instance.createUser(user, context);
 

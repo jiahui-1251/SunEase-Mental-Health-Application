@@ -14,6 +14,7 @@ class SignUpController extends GetxController {
   final userName = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
 
+  var UserType = ''.obs;
   final userRepo = Get.put(UserRepository());
 
   void signUserUp(BuildContext context) async {
@@ -44,6 +45,7 @@ class SignUpController extends GetxController {
             UserName: userName.text,
             email: email.text,
             password: password.text,
+            UserType: UserType.value,
           );
 
           await userRepo.createUser(newUser);

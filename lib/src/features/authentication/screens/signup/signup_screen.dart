@@ -4,7 +4,7 @@ import 'package:fyp/src/common_widgets/form/form_header_widget.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controller.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:fyp/src/features/authentication/screens/signup/widgets/signup_form_widget.dart';
 import 'package:get/get.dart';

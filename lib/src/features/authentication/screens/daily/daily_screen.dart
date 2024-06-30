@@ -3,6 +3,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
+import 'package:fyp/src/features/authentication/screens/daily/widget/challenge_tile_widget.dart';
 
 class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key});
@@ -75,65 +76,47 @@ class _DailyScreenState extends State<DailyScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: tFormHeight + 10),
+                    const SizedBox(height: tFormHeight - 10),
 
                     // Daily Challenges Widget
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: tGreyColor,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: ExpansionTile(
-                                title: Text(
-                                  "Say You're Great",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Write down a list of things you like about yourself and stuff you excel at.",
-                                          style: Theme.of(context).textTheme.bodyLarge,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          "Challenge Benefit",
-                                          style: Theme.of(context).textTheme.titleSmall,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          "Focusing on your strengths makes you feel more complete and powerful, while focusing on your shortcomings leads to feelings of incompleteness and stress.",
-                                          style: Theme.of(context).textTheme.bodyMedium,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Checkbox(
-                            value: isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            },
-                            activeColor: tOrangeColor,
-                          ),
-                        ],
-                      ),
+                    ChallengeTile(
+                      title: "Say You're Great",
+                      description: "Write down a list of things you like about yourself and stuff you excel at.",
+                      benefitDescription: "Focusing on your strengths makes you feel more complete and powerful, while focusing on your shortcomings leads to feelings of incompleteness and stress.",
+                      isChecked: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      }
+                    ),
+
+                    const SizedBox(height: tFormHeight-15),
+
+                    ChallengeTile(
+                      title: "Say You're Great",
+                      description: "Write down a list of things you like about yourself and stuff you excel at.",
+                      benefitDescription: "Focusing on your strengths makes you feel more complete and powerful, while focusing on your shortcomings leads to feelings of incompleteness and stress.",
+                      isChecked: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      }
+                    ),
+
+                    const SizedBox(height: tFormHeight-15),
+
+                    ChallengeTile(
+                      title: "Say You're Great",
+                      description: "Write down a list of things you like about yourself and stuff you excel at.",
+                      benefitDescription: "Focusing on your strengths makes you feel more complete and powerful, while focusing on your shortcomings leads to feelings of incompleteness and stress.",
+                      isChecked: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      }
                     ),
                   ],
                 ),

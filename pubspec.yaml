@@ -109,6 +109,7 @@ flutter:
     - assets/images/forget_password/
     - assets/images/profile_images/
     - assets/images/meditation_images/
+    - assets/images/mood_images/
     - assets/images/
     - assets/fonts/
     - assets/md_file/

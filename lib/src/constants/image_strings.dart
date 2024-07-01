@@ -21,3 +21,9 @@ const String tMeditationImage1 = "assets/images/meditation_images/meditation_ima
 const String tMeditationImage2 = "assets/images/meditation_images/meditation_image2.jpg";
 const String tMeditationImage3 = "assets/images/meditation_images/meditation_image3.jpg";
 const String tMeditationImage4 = "assets/images/meditation_images/meditation_image4.jpg";
+
+//Add Mood screen
+const String tHappyFace = "assets/images/mood_images/happy_face.png";
+const String tMadFace = "assets/images/mood_images/mad_face.png";
+const String tSadFace = "assets/images/mood_images/sad_face.png";
+const String tNormalFace = "assets/images/mood_images/normal_face.png";

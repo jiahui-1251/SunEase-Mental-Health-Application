@@ -41,7 +41,7 @@ class UserChallengesModel {
       ChallengeID: List<String>.from(data['ChallengeID']),
       ChallengeStatus: List<bool>.from(data['ChallengeStatus']),
       Date: (data['Date'] as Timestamp).toDate(),
-      NumCompletion: data['NumCompletion'],
+      NumCompletion: data['NumCompletion'] ?? 0,
     );
   }
 }

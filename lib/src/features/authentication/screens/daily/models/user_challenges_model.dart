@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserChallenge {
+class UserChallengesModel {
   final String UserID;
   final List<String> ChallengeID;
   final List<bool> ChallengeStatus;
-  final Timestamp Date;
-  final int NumCompletion;
+  DateTime Date;
+  int NumCompletion;
 
-  UserChallenge({
+  UserChallengesModel({
     required this.UserID,
     required this.ChallengeID,
     required this.ChallengeStatus,
@@ -15,7 +15,17 @@ class UserChallenge {
     required this.NumCompletion,
   });
 
-  Map<String, dynamic> toJson() {
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'UserID': UserID,
+  //     'ChallengeID': ChallengeID,
+  //     'ChallengeStatus': ChallengeStatus,
+  //     'Date': Date,
+  //     'numCompletion': NumCompletion,
+  //   };
+  // }
+
+  Map<String, dynamic> toMap() {
     return {
       'UserID': UserID,
       'ChallengeID': ChallengeID,
@@ -25,14 +35,24 @@ class UserChallenge {
     };
   }
 
-  factory UserChallenge.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final data = snapshot.data()!;
-    return UserChallenge(
-      UserID: data['UserID'],
+  factory UserChallengesModel.fromMap(Map<String, dynamic> data, String UserID) {
+    return UserChallengesModel(
+      UserID: UserID,
       ChallengeID: List<String>.from(data['ChallengeID']),
       ChallengeStatus: List<bool>.from(data['ChallengeStatus']),
-      Date: data['Date'],
+      Date: (data['Date'] as Timestamp).toDate(),
       NumCompletion: data['NumCompletion'],
     );
   }
+
+  // factory UserChallenge.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+  //   final data = snapshot.data()!;
+  //   return UserChallenge(
+  //     UserID: data['UserID'],
+  //     ChallengeID: List<String>.from(data['ChallengeID']),
+  //     ChallengeStatus: List<bool>.from(data['ChallengeStatus']),
+  //     Date: data['Date'],
+  //     NumCompletion: data['NumCompletion'],
+  //   );
+  // }
 }

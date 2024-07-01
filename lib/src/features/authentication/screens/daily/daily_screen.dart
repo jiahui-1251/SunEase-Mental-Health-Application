@@ -16,12 +16,13 @@ class DailyScreen extends StatefulWidget {
 }
 
 class _DailyScreenState extends State<DailyScreen> {
-  final PageController _pageController = PageController(initialPage: 0);
-  int _currentPage = 0;
+  final int _initialPage = 10000; // Large number for middle point
+  final PageController _pageController = PageController(initialPage: 10000);
+  int _currentPage = 10000;
 
   DateTime getDateForPage(int page) {
     final today = DateTime.now();
-    return today.add(Duration(days: 7 * page));
+    return today.add(Duration(days: 7 * (page - _initialPage)));
   }
 
   List<DateTime> getDaysOfWeek(DateTime date) {
@@ -29,9 +30,13 @@ class _DailyScreenState extends State<DailyScreen> {
     return List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
   }
 
+  String getMonthYearString(DateTime date) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return "${months[date.month - 1]} ${date.year}";
+  }
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final dailyChallengeController = Get.put(DailyChallengeController());
 
     return SafeArea(
@@ -149,7 +154,7 @@ class _DailyScreenState extends State<DailyScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Text(
-                          "${getDateForPage(_currentPage).month} ${getDateForPage(_currentPage).year}",
+                          getMonthYearString(getDateForPage(_currentPage)),
                           style: Theme.of(context).textTheme.bodyLarge,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

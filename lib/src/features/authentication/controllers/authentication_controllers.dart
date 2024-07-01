@@ -50,9 +50,14 @@ class SignUpController extends GetxController {
 
           await userRepo.createUser(newUser);
 
+          // // Assign daily challenges
+          // ChallengeController challengeController = Get.find();
+          // await challengeController.assignDailyChallengesToUser(userId);
+
           Navigator.pop(context);
 
-          Get.to(() => const LoginScreen());
+          // Redirect to login screen
+          Get.offAll(() => const LoginScreen());
         } else {
           Navigator.pop(context);
           showErrorMessage(context, "Failed to retrieve user ID");
@@ -70,8 +75,6 @@ class SignUpController extends GetxController {
       print(e); // Log any unexpected errors
     }
   }
-
-
 
   void showErrorMessage(BuildContext context, String message) {
     showDialog(
@@ -94,7 +97,7 @@ class SignUpController extends GetxController {
     await FirebaseAuth.instance.signOut();
   }
 
-    Future<void> deleteAccount(BuildContext context) async {
+  Future<void> deleteAccount(BuildContext context) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
 

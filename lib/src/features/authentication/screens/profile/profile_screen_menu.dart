@@ -16,12 +16,12 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileScreenMenu extends StatelessWidget {
   const ProfileScreenMenu({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final profileController = Get.put(ProfileController());
     final signUpController = Get.put(SignUpController());
-    
+
     return SafeArea(
       child: Scaffold(
         appBar: PageTitleWidget(title: tProfile),
@@ -32,7 +32,7 @@ class ProfileScreenMenu extends StatelessWidget {
               future: profileController.getUserData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && snapshot.data != null) {
                     UserModel userData = snapshot.data as UserModel;
                     return Column(
                       children: [

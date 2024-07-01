@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/screens/daily/daily_challenge_controller.dart';
 import 'package:get/get.dart';
@@ -61,26 +60,44 @@ class DailyScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () async {
-                                //await dailyChallengeController.loadUserChallenges();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: const CircleBorder(),
-                                padding: const EdgeInsets.all(15),
-                                backgroundColor: tOrangeColor,
-                              ),
-                              child: Icon(
-                                Icons.refresh_outlined,
-                                color: Colors.white,
-                              ),
-                            ),
+
+                            // Refresh or completed button
+                            dailyChallengeController.userChallenge.value!.NumCompletion == 3
+                                ? ElevatedButton(
+                                    onPressed: null,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(15),
+                                      backgroundColor: tGreenColor,
+                                    ),
+                                    child: Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () async {
+                                      await dailyChallengeController.refreshChallenges();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(15),
+                                      backgroundColor: tOrangeColor,
+                                    ),
+                                    child: Icon(
+                                      Icons.refresh_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ],
                         ),
                       ),
                       const SizedBox(height: tFormHeight - 10),
                       ...dailyChallengeController.dailyChallenges.map((challenge) {
                         int index = dailyChallengeController.userChallenge.value!.ChallengeID.indexOf(challenge.ChallengeID);
+                        if (index == -1) {
+                          return SizedBox.shrink(); // Skip if index is not found
+                        }
                         return Padding(
                           padding: const EdgeInsets.only(bottom: tFormHeight - 15),
                           child: ChallengeTile(

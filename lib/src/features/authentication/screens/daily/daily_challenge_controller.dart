@@ -1,4 +1,3 @@
-// controllers/daily_challenge_controller.dart
 import 'package:fyp/src/features/authentication/screens/daily/models/daily_challenges_model.dart';
 import 'package:fyp/src/features/authentication/screens/daily/models/user_challenges_model.dart';
 import 'package:fyp/src/repository/daily_challenges_repository/challenge_repository.dart';
@@ -52,5 +51,25 @@ class DailyChallengeController extends GetxController {
     userChallenge.value!.NumCompletion = userChallenge.value!.ChallengeStatus.where((status) => status).length;
     await _challengeRepo.updateUserChallenge(userChallenge.value!);
     await _loadDailyChallenges();
+  }
+
+  Future<void> refreshChallenges() async {
+    if (userChallenge.value!.NumCompletion < 3) {
+      List<DailyChallengeModel> allChallenges = await _challengeRepo.getDailyChallenges();
+      allChallenges.shuffle();
+      List<String> selectedChallengeIds = allChallenges.take(3).map((challenge) => challenge.ChallengeID).toList();
+      List<bool> selectedChallengeStatus = [false, false, false];
+
+      userChallenge.value = UserChallengesModel(
+        UserID: FirebaseAuth.instance.currentUser!.uid,
+        ChallengeID: selectedChallengeIds,
+        ChallengeStatus: selectedChallengeStatus,
+        Date: DateTime.now(),
+        NumCompletion: 0,
+      );
+
+      await _challengeRepo.createUserChallenge(userChallenge.value!);
+      await _loadDailyChallenges();
+    }
   }
 }

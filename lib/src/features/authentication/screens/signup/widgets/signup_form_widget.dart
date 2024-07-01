@@ -3,7 +3,7 @@ import 'package:fyp/src/common_widgets/form/privacy_policy.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/controllers/authentication_controller.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/models/user_model.dart';
 import 'package:get/get.dart';
 

@@ -5,7 +5,7 @@ class UserChallenge {
   final List<String> ChallengeID;
   final List<bool> ChallengeStatus;
   final Timestamp Date;
-  int NumCompletion;
+  final int NumCompletion;
 
   UserChallenge({
     required this.UserID,

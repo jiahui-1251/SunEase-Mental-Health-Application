@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fyp/src/constants/image_strings.dart';
-import 'package:fyp/src/features/authentication/controllers/authentication_controller.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_mail.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:fyp/src/features/authentication/screens/forum/forum_screen.dart';

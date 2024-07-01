@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/controllers/login_controller.dart';
+import 'package:fyp/src/features/authentication/controllers/login_controllers.dart';
 import 'package:fyp/src/features/authentication/screens/forget_password/forget_password_mail.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/navigation_menu.dart';
 import 'package:get/get.dart';

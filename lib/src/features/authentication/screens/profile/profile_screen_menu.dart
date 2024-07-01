@@ -3,7 +3,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/controllers/authentication_controller.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/controllers/profile_controller.dart';
 import 'package:fyp/src/features/authentication/models/user_model.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';

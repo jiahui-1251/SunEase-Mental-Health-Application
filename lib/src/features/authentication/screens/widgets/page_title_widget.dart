@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:fyp/src/features/authentication/controllers/authentication_controller.dart'; 
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart'; 
 
 class PageTitleWidget extends StatelessWidget implements PreferredSizeWidget {
   const PageTitleWidget({

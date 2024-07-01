@@ -1,19 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/models/user_model.dart';
-import 'package:fyp/src/features/authentication/screens/daily/models/daily_challenges_model.dart';
-import 'package:fyp/src/features/authentication/screens/daily/models/user_challenges_model.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
-import 'package:fyp/src/repository/challenges_repository/daily_challenges_repository.dart';
-import 'package:fyp/src/repository/challenges_repository/user_challenges_repository.dart';
 import 'package:fyp/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
-  final DailyChallengeRepository _dailyChallengeRepo = Get.put(DailyChallengeRepository());
-  final UserChallengeRepository _userChallengeRepo = Get.put(UserChallengeRepository());
 
   // TextField Controllers to get data from TextFields
   final email = TextEditingController();
@@ -78,21 +71,6 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> _initializeUserChallenges(String userId) async {
-    List<DailyChallenge> allChallenges = await _dailyChallengeRepo.getDailyChallenges();
-    allChallenges.shuffle();  // Randomize the list
-    List<DailyChallenge> selectedChallenges = allChallenges.take(3).toList();
-
-    UserChallenge userChallenge = UserChallenge(
-      UserID: userId,
-      ChallengeID: selectedChallenges.map((c) => c.ChallengeID).toList(),
-      ChallengeStatus: List.filled(3, false),
-      Date: Timestamp.now(),
-      NumCompletion: 0,
-    );
-
-    await _userChallengeRepo.createUserChallenge(userChallenge);
-  }
 
 
   void showErrorMessage(BuildContext context, String message) {

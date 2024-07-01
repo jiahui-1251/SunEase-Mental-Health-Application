@@ -194,7 +194,7 @@ class _DailyScreenState extends State<DailyScreen> {
                                           width: 35,
                                           height: 35,
                                           decoration: BoxDecoration(
-                                            color: tGreyColor,
+                                            color: Color.fromARGB(255, 220, 218, 218),
                                             shape: BoxShape.circle,
                                           ),
                                           child: Center(

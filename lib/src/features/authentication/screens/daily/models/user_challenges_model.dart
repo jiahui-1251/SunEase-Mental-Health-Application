@@ -44,15 +44,4 @@ class UserChallengesModel {
       NumCompletion: data['NumCompletion'],
     );
   }
-
-  // factory UserChallenge.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-  //   final data = snapshot.data()!;
-  //   return UserChallenge(
-  //     UserID: data['UserID'],
-  //     ChallengeID: List<String>.from(data['ChallengeID']),
-  //     ChallengeStatus: List<bool>.from(data['ChallengeStatus']),
-  //     Date: data['Date'],
-  //     NumCompletion: data['NumCompletion'],
-  //   );
-  // }
 }

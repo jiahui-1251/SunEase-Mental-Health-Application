@@ -20,13 +20,4 @@ class DailyChallengeModel{
     );
   }
 
-  // factory DailyChallenge.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-  //   final data = snapshot.data()!;
-  //   return DailyChallenge(
-  //     ChallengeID: snapshot.id,
-  //     ChallengeTitle: data['ChallengeTitle'],
-  //     ChallengeDescription: data['ChallengeDescription'],
-  //     ChallengeBenefit: data['ChallengeBenefit'],
-  //   );
-  // }
 }

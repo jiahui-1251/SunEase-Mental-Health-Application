@@ -8,16 +8,31 @@ import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:fyp/src/features/authentication/screens/daily/widget/challenge_tile_widget.dart';
 
-class DailyScreen extends StatelessWidget {
+class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key});
+
+  @override
+  _DailyScreenState createState() => _DailyScreenState();
+}
+
+class _DailyScreenState extends State<DailyScreen> {
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
+
+  DateTime getDateForPage(int page) {
+    final today = DateTime.now();
+    return today.add(Duration(days: 7 * page));
+  }
+
+  List<DateTime> getDaysOfWeek(DateTime date) {
+    final startOfWeek = date.subtract(Duration(days: date.weekday - 1));
+    return List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final dailyChallengeController = Get.put(DailyChallengeController());
-    final today = DateTime.now();
-    final startOfWeek = today.subtract(Duration(days: today.weekday - 1)); // Get the start of the week (Monday)
-    final daysOfWeek = List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
 
     return SafeArea(
       child: Scaffold(
@@ -99,11 +114,11 @@ class DailyScreen extends StatelessWidget {
 
                       const SizedBox(height: tFormHeight - 10),
 
-                      //Challenge Widget
+                      // Challenge Widget
                       ...dailyChallengeController.dailyChallenges.map((challenge) {
                         int index = dailyChallengeController.userChallenge.value!.ChallengeID.indexOf(challenge.ChallengeID);
                         if (index == -1) {
-                          return SizedBox.shrink(); 
+                          return SizedBox.shrink();
                         }
                         return Padding(
                           padding: const EdgeInsets.only(bottom: tFormHeight - 15),
@@ -118,7 +133,7 @@ class DailyScreen extends StatelessWidget {
                           ),
                         );
                       }).toList(),
-                      
+
                       const SizedBox(height: tFormHeight),
 
                       Padding(
@@ -134,7 +149,7 @@ class DailyScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Text(
-                          "This week",
+                          "${getDateForPage(_currentPage).month} ${getDateForPage(_currentPage).year}",
                           style: Theme.of(context).textTheme.bodyLarge,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -143,44 +158,58 @@ class DailyScreen extends StatelessWidget {
 
                       const SizedBox(height: 10),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: daysOfWeek.map((date) {
-                          return Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                Get.to(() => AddMoodScreen()); // Navigate to add_mood_screen.dart
-                              },
-                              child: Column(
-                                children: [
-                                  Text(
-                                    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][date.weekday - 1],
-                                    style: Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  const SizedBox(height: 3),
-                                  Container(
-                                    width: 35,
-                                    height: 35,
-                                    decoration: BoxDecoration(
-                                      color: tGreyColor,
-                                      shape: BoxShape.circle,
+                      SizedBox(
+                        height: 60,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          onPageChanged: (int page) {
+                            setState(() {
+                              _currentPage = page;
+                            });
+                          },
+                          itemBuilder: (context, pageIndex) {
+                            final date = getDateForPage(pageIndex);
+                            final daysOfWeek = getDaysOfWeek(date);
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: daysOfWeek.map((date) {
+                                return Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.to(() => AddMoodScreen()); // Navigate to add_mood_screen.dart
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][date.weekday - 1],
+                                          style: Theme.of(context).textTheme.bodyMedium,
+                                        ),
+                                        const SizedBox(height: 3),
+                                        Container(
+                                          width: 35,
+                                          height: 35,
+                                          decoration: BoxDecoration(
+                                            color: tGreyColor,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "${date.day}",
+                                              style: Theme.of(context).textTheme.bodyMedium,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                        "${date.day}",
-                                        style: Theme.of(context).textTheme.bodyMedium,
-                                      ),
-                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList(),
+                                );
+                              }).toList(),
+                            );
+                          },
+                        ),
                       ),
-                      
-                      const SizedBox(height: tFormHeight),
 
+                      const SizedBox(height: tFormHeight),
                     ],
                   ),
                 ),

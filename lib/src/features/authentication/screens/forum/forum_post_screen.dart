@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/features/authentication/screens/forum/widget/comment_widget.dart';
+import 'package:fyp/src/features/forum_post/controllers/post_comment_controller.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
-class ForumPostScreen extends StatelessWidget {
+class ForumPostScreen extends StatefulWidget {
   final ForumPostModel post;
 
-  const ForumPostScreen({super.key, required this.post});
+  ForumPostScreen({super.key, required this.post});
+
+  @override
+  _ForumPostScreenState createState() => _ForumPostScreenState();
+}
+
+class _ForumPostScreenState extends State<ForumPostScreen> {
+  final PostCommentController _controller = Get.put(PostCommentController());
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.loadComments(widget.post.PostID!);
+  }
 
   String timeAgo(DateTime dateTime) {
     final now = DateTime.now();
@@ -39,19 +53,19 @@ class ForumPostScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(post.PostTitle, style: Theme.of(context).textTheme.bodyLarge),
+                    Text(widget.post.PostTitle, style: Theme.of(context).textTheme.titleSmall),
                     SizedBox(height: 10),
-                    Text(post.PostContent),
+                    Text(widget.post.PostContent, style: Theme.of(context).textTheme.bodyMedium),
                     SizedBox(height: 20),
                     Row(
                       children: [
                         Icon(Icons.favorite, color: tOrangeColor),
                         SizedBox(width: 5),
-                        Text(post.LikeNum.toString()),
+                        Text(widget.post.LikeNum.toString()),
                         SizedBox(width: 20),
                         Icon(Icons.comment, color: tOrangeColor),
                         SizedBox(width: 5),
-                        Text(post.ComNum.toString()),
+                        Text(widget.post.ComNum.toString()),
                       ],
                     ),
                     SizedBox(height: 20),
@@ -59,11 +73,16 @@ class ForumPostScreen extends StatelessWidget {
                     SizedBox(height: 10),
                     Text("Comments", style: Theme.of(context).textTheme.titleSmall),
                     SizedBox(height: 10),
-                    Column(
-                      children: comments.map((comment) {
-                        return CommentWidget(comment: comment, timeAgo: timeAgo);
-                      }).toList(),
-                    ),
+                    Obx(() {
+                      return Column(
+                        children: _controller.comments.map((comment) {
+                          return CommentWidget(
+                            comment: comment,
+                            timeAgo: timeAgo,
+                          );
+                        }).toList(),
+                      );
+                    }),
                     SizedBox(height: 80), // Extra space for the comment panel
                   ],
                 ),
@@ -92,6 +111,7 @@ class ForumPostScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: TextField(
+                          controller: _controller.commentController,
                           decoration: InputDecoration(
                             hintText: 'Write a comment...',
                             hintStyle: Theme.of(context).textTheme.bodyMedium,
@@ -103,7 +123,7 @@ class ForumPostScreen extends StatelessWidget {
                     SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
-                        // Handle send comment
+                        _controller.addComment(widget.post.PostID!);
                       },
                       child: CircleAvatar(
                         radius: 20,

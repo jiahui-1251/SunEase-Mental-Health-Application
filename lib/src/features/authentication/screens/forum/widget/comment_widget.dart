@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
-
-// Dummy comment model
-class CommentModel {
-  final String userType;
-  final String content;
-  final DateTime dateTime;
-  final int likeNum;
-
-  CommentModel({
-    required this.userType,
-    required this.content,
-    required this.dateTime,
-    required this.likeNum,
-  });
-}
-
-// Dummy comments data
-final List<CommentModel> comments = [
-  CommentModel(userType: 'Counsellor', content: 'Great post!', dateTime: DateTime.now().subtract(Duration(minutes: 28)), likeNum: 5),
-  CommentModel(userType: 'User', content: 'Thank you for sharing.', dateTime: DateTime.now().subtract(Duration(hours: 1)), likeNum: 3),
-];
+import 'package:fyp/src/features/forum_post/models/post_comment_model.dart';
 
 class CommentWidget extends StatelessWidget {
-  final CommentModel comment;
+  final PostCommentModel comment;
   final String Function(DateTime) timeAgo;
 
   const CommentWidget({required this.comment, required this.timeAgo});
@@ -64,7 +44,7 @@ class CommentWidget extends StatelessWidget {
                             ),
                       ),
                       SizedBox(height: 5),
-                      Text(comment.content),
+                      Text(comment.commentContent),
                     ],
                   ),
                 ),
@@ -72,7 +52,7 @@ class CommentWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      timeAgo(comment.dateTime),
+                      timeAgo(comment.commentTime.toDate()),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     SizedBox(width: 20),

@@ -8,6 +8,7 @@ import 'package:fyp/src/repository/forum_repository/forum_repository.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:fyp/src/features/authentication/screens/forum/forum_post_screen.dart';
 
 class PostWidget extends StatefulWidget {
   final ForumPostModel post;
@@ -73,91 +74,96 @@ class _PostWidgetState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: size.width * 0.9,
-              decoration: BoxDecoration(
-                color: tGreyColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          _getCategoryIcon(widget.post.Category),
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.post.Category,
-                            style: Theme.of(context).textTheme.bodyLarge,
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => ForumPostScreen(post: widget.post));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: size.width * 0.9,
+                decoration: BoxDecoration(
+                  color: tGreyColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            _getCategoryIcon(widget.post.Category),
+                            color: Colors.black,
                           ),
-                          Text(
-                            'Posted ${timeAgo(widget.post.PostDateTime)}',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    '#${widget.post.PostID}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    widget.post.PostTitle,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
                         ),
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 5),
-                  ExpandableText(widget.post.PostContent),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: tOrangeColor,
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.post.Category,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            Text(
+                              'Posted ${timeAgo(widget.post.PostDateTime)}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    onPressed: _toggleLike,
-                  ),
-                  Text('$likeNum', style: TextStyle(color: tOrangeColor)),
-                  IconButton(
-                    icon: Icon(Icons.comment, color: tOrangeColor),
-                    onPressed: () {
-                      // Handle the comment button press
-                    },
-                  ),
-                ],
+                    const SizedBox(height: 5),
+                    Text(
+                      '#${widget.post.PostID}',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      widget.post.PostTitle,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 5),
+                    ExpandableText(widget.post.PostContent),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        isLiked ? Icons.favorite : Icons.favorite_border,
+                        color: tOrangeColor,
+                      ),
+                      onPressed: _toggleLike,
+                    ),
+                    Text('$likeNum', style: TextStyle(color: tOrangeColor)),
+                    IconButton(
+                      icon: Icon(Icons.comment, color: tOrangeColor),
+                      onPressed: () {
+                        Get.to(() => ForumPostScreen(post: widget.post));
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );

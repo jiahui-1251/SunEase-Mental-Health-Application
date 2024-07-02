@@ -95,9 +95,9 @@ class MoodController extends GetxController {
       case 'sad':
         return Colors.grey;
       case 'normal':
-        return Colors.yellow;
+        return Color.fromARGB(255, 245, 231, 106);
       default:
-        return Colors.grey;
+        return Color.fromARGB(255, 220, 218, 218);
     }
   }
 }

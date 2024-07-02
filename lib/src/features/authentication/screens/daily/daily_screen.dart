@@ -9,6 +9,7 @@ import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:fyp/src/features/authentication/screens/daily/widget/challenge_tile_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key});
@@ -185,20 +186,27 @@ class _DailyScreenState extends State<DailyScreen> {
                               children: daysOfWeek.map((date) {
                                 return Expanded(
                                   child: InkWell(
-                                    onTap: () {
-                                      Get.to(() => AddMoodScreen(date: date)); // Navigate to add_mood_screen.dart
+                                    onTap: () async {
+                                      final userId = FirebaseAuth.instance.currentUser!.uid;
+                                      await Get.to(() => AddMoodScreen(date: date)); // Navigate to add_mood_screen.dart
+                                      await moodController.loadUserMood(userId); // Reload user moods after adding mood
                                     },
                                     child: Obx(() {
                                       // Only wrap the widgets that depend on observable variables in Obx
-                                      final color = moodController.moods
-                                          .where((m) => m.UserID == 'currentUserId')
+                                      final userId = FirebaseAuth.instance.currentUser!.uid;
+                                      final mood = moodController.moods
+                                          .where((m) => m.UserID == userId)
                                           .expand((m) => m.Date
                                               .asMap()
                                               .entries
                                               .where((e) => e.value.isSameDate(date))
-                                              .map((e) => moodController.getMoodColor(m.Mood[e.key])))
-                                          .firstOrNull ??
-                                          const Color.fromARGB(255, 220, 218, 218);
+                                              .map((e) => m.Mood[e.key]))
+                                          .firstOrNull;
+
+                                      final color = mood != null
+                                          ? moodController.getMoodColor(mood)
+                                          : const Color.fromARGB(255, 220, 218, 218);
+
                                       return Column(
                                         children: [
                                           Text(

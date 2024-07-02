@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/features/authentication/screens/daily/models/user_mood_model.dart';
 import 'package:fyp/src/features/authentication/screens/daily/widget/timestamp_extension.dart';
 import 'package:fyp/src/repository/daily_challenges_repository/mood_repository.dart';
@@ -11,7 +12,7 @@ class MoodController extends GetxController {
   RxBool isLoading = false.obs;
   RxList<UserMood> moods = <UserMood>[].obs;
 
-  Future<void> createMoodDocumentIfNotExists(String userID, DateTime date) async {
+  Future<void> createMoodDocumentIfNotExists(String userID) async {
     final docRef = _firestore.collection('UserMood').doc(userID);
 
     final docSnapshot = await docRef.get();
@@ -19,8 +20,8 @@ class MoodController extends GetxController {
       // Create a new UserMood document
       final newMood = UserMood(
         UserID: userID,
-        Date: [Timestamp.fromDate(date)],
-        Mood: ["-"],
+        Date: [],
+        Mood: [],
       );
       await docRef.set(newMood.toJson());
     }
@@ -56,30 +57,13 @@ class MoodController extends GetxController {
         existingMood.Mood.add(mood);
       }
 
-      await _moodRepository.updateUserMood(existingMood);
-
-      // Refresh user mood data
-      loadUserMood(userID);
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  Future<void> ensureMoodEntryForDate(String userID, DateTime date) async {
-    isLoading.value = true;
-    try {
-      final existingMood = moods.firstWhere(
-        (m) => m.UserID == userID,
-        orElse: () => UserMood(UserID: userID, Date: [], Mood: []),
-      );
-
-      final dateIndex = existingMood.Date.indexWhere((d) => d.toDate().isSameDate(date));
-      if (dateIndex == -1) {
-        existingMood.Date.add(Timestamp.fromDate(date));
-        existingMood.Mood.add("-");
+      if (existingMood.Date.isEmpty && existingMood.Mood.isEmpty) {
+        await _moodRepository.createUserMood(existingMood);
+      } else {
         await _moodRepository.updateUserMood(existingMood);
       }
 
+      // Refresh user mood data
       loadUserMood(userID);
     } finally {
       isLoading.value = false;
@@ -93,11 +77,11 @@ class MoodController extends GetxController {
       case 'mad':
         return Colors.red;
       case 'sad':
-        return Colors.grey;
+        return tGreyColor;
       case 'normal':
-        return Color.fromARGB(255, 245, 231, 106);
+        return Colors.yellow;
       default:
-        return Color.fromARGB(255, 220, 218, 218);
+        return const Color.fromARGB(255, 220, 218, 218);
     }
   }
 }

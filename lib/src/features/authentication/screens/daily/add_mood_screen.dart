@@ -13,7 +13,7 @@ class AddMoodScreen extends StatelessWidget {
 
   AddMoodScreen({required this.date, super.key}) {
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    moodController.ensureMoodEntryForDate(userId, date);
+    moodController.createMoodDocumentIfNotExists(userId);
   }
 
   @override

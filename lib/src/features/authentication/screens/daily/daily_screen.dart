@@ -24,6 +24,14 @@ class _DailyScreenState extends State<DailyScreen> {
   int _currentPage = 10000;
   final MoodController moodController = Get.put(MoodController()); // Initialize MoodController
 
+  @override
+  void initState() {
+    super.initState();
+    // Load user mood data when the screen is initialized
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    moodController.loadUserMood(userId);
+  }
+
   DateTime getDateForPage(int page) {
     final today = DateTime.now();
     return today.add(Duration(days: 7 * (page - _initialPage)));

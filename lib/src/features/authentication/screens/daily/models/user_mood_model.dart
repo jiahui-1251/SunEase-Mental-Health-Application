@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserMood {
   String UserID;
-  List<DateTime> Date;
+  List<Timestamp> Date;
   List<String> Mood;
 
   UserMood({
@@ -14,7 +14,7 @@ class UserMood {
   factory UserMood.fromJson(Map<String, dynamic> json) {
     return UserMood(
       UserID: json['UserID'],
-      Date: (json['Date'] as List).map((e) => (e as Timestamp).toDate()).toList(),
+      Date: (json['Date'] as List).map((e) => e as Timestamp).toList(),
       Mood: List<String>.from(json['Mood']),
     );
   }
@@ -22,7 +22,15 @@ class UserMood {
   Map<String, dynamic> toJson() {
     return {
       'UserID': UserID,
-      'Date': Date.map((e) => Timestamp.fromDate(e)).toList(),
+      'Date': Date,
+      'Mood': Mood,
+    };
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'UserID': UserID,
+      'Date': Date,
       'Mood': Mood,
     };
   }

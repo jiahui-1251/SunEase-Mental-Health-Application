@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
+import 'package:get/get.dart';
+import 'package:fyp/src/features/authentication/screens/daily/controllers/mood_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddMoodScreen extends StatelessWidget {
-  const AddMoodScreen({super.key});
+  final DateTime date;
+  final MoodController moodController = Get.find<MoodController>();
+  final RxString selectedMood = ''.obs;
+  
+  AddMoodScreen({required this.date, super.key}) {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    moodController.createMoodDocumentIfNotExists(userId, date);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +40,30 @@ class AddMoodScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MoodButton(imagePath: tHappyFace),
-                    MoodButton(imagePath: tMadFace),
-                    MoodButton(imagePath: tSadFace),
-                    MoodButton(imagePath: tNormalFace),
+                    MoodButton(
+                      imagePath: tHappyFace,
+                      mood: 'happy',
+                      onSelected: (mood) => selectedMood.value = mood,
+                      isSelected: selectedMood.value == 'happy',
+                    ),
+                    MoodButton(
+                      imagePath: tMadFace,
+                      mood: 'mad',
+                      onSelected: (mood) => selectedMood.value = mood,
+                      isSelected: selectedMood.value == 'mad',
+                    ),
+                    MoodButton(
+                      imagePath: tSadFace,
+                      mood: 'sad',
+                      onSelected: (mood) => selectedMood.value = mood,
+                      isSelected: selectedMood.value == 'sad',
+                    ),
+                    MoodButton(
+                      imagePath: tNormalFace,
+                      mood: 'normal',
+                      onSelected: (mood) => selectedMood.value = mood,
+                      isSelected: selectedMood.value == 'normal',
+                    ),
                   ],
                 ),
               ),
@@ -42,8 +72,14 @@ class AddMoodScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Center(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Handle add mood action here
+                    onPressed: () async {
+                      if (selectedMood.value.isNotEmpty) {
+                        final userId = FirebaseAuth.instance.currentUser!.uid;
+                        await moodController.addOrUpdateMood(userId, date, selectedMood.value);
+                        Get.back();
+                      } else {
+                        Get.snackbar('Error', 'Please select a mood');
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: tBlackColor,
@@ -66,21 +102,28 @@ class AddMoodScreen extends StatelessWidget {
 
 class MoodButton extends StatelessWidget {
   final String imagePath;
+  final String mood;
+  final Function(String) onSelected;
+  final bool isSelected;
 
-  const MoodButton({required this.imagePath, super.key});
+  const MoodButton({
+    required this.imagePath,
+    required this.mood,
+    required this.onSelected,
+    required this.isSelected,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Handle mood button tap action here
-      },
+      onTap: () => onSelected(mood),
       child: Container(
         width: 80,
         height: 80,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: tWhiteColor,
+          color: isSelected ? Colors.grey[300] : tWhiteColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(0),

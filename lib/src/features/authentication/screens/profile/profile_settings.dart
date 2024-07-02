@@ -4,24 +4,6 @@ import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/profile/widgets/profile_screen_menu_widget.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
-import 'package:flutter/material.dart';
-import 'package:fyp/src/constants/sizes.dart';
-import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/screens/profile/widgets/profile_screen_menu_widget.dart';
-import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
-import 'package:get/get.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
-import 'package:flutter/material.dart';
-import 'package:fyp/src/constants/sizes.dart';
-import 'package:fyp/src/constants/text_strings.dart';
-import 'package:fyp/src/features/authentication/screens/profile/widgets/profile_screen_menu_widget.dart';
-import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileSettingsScreen extends StatelessWidget {

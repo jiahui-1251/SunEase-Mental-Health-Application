@@ -50,10 +50,6 @@ class SignUpController extends GetxController {
 
           await userRepo.createUser(newUser);
 
-          // // Assign daily challenges
-          // ChallengeController challengeController = Get.find();
-          // await challengeController.assignDailyChallengesToUser(userId);
-
           Navigator.pop(context);
 
           // Redirect to login screen

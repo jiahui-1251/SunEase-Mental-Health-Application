@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/screens/daily/add_mood_screen.dart';
-import 'package:fyp/src/features/authentication/screens/daily/daily_challenge_controller.dart';
+import 'package:fyp/src/features/authentication/screens/daily/controllers/daily_challenge_controller.dart';
+import 'package:fyp/src/features/authentication/screens/daily/controllers/mood_controller.dart'; // Import MoodController
+import 'package:fyp/src/features/authentication/screens/daily/widget/timestamp_extension.dart';
 import 'package:get/get.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
@@ -19,6 +21,7 @@ class _DailyScreenState extends State<DailyScreen> {
   final int _initialPage = 10000; // Large number for middle point
   final PageController _pageController = PageController(initialPage: 10000);
   int _currentPage = 10000;
+  final MoodController moodController = Get.put(MoodController()); // Initialize MoodController
 
   DateTime getDateForPage(int page) {
     final today = DateTime.now();
@@ -43,7 +46,8 @@ class _DailyScreenState extends State<DailyScreen> {
       child: Scaffold(
         appBar: PageTitleWidget(title: tDaily),
         body: Obx(() {
-          if (dailyChallengeController.userChallenge.value == null || dailyChallengeController.dailyChallenges.isEmpty) {
+          if (dailyChallengeController.userChallenge.value == null ||
+              dailyChallengeController.dailyChallenges.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
@@ -121,7 +125,8 @@ class _DailyScreenState extends State<DailyScreen> {
 
                       // Challenge Widget
                       ...dailyChallengeController.dailyChallenges.map((challenge) {
-                        int index = dailyChallengeController.userChallenge.value!.ChallengeID.indexOf(challenge.ChallengeID);
+                        int index = dailyChallengeController.userChallenge.value!.ChallengeID
+                            .indexOf(challenge.ChallengeID);
                         if (index == -1) {
                           return SizedBox.shrink();
                         }
@@ -181,31 +186,43 @@ class _DailyScreenState extends State<DailyScreen> {
                                 return Expanded(
                                   child: InkWell(
                                     onTap: () {
-                                      Get.to(() => AddMoodScreen()); // Navigate to add_mood_screen.dart
+                                      Get.to(() => AddMoodScreen(date: date)); // Navigate to add_mood_screen.dart
                                     },
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][date.weekday - 1],
-                                          style: Theme.of(context).textTheme.bodyMedium,
-                                        ),
-                                        const SizedBox(height: 3),
-                                        Container(
-                                          width: 35,
-                                          height: 35,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromARGB(255, 220, 218, 218),
-                                            shape: BoxShape.circle,
+                                    child: Obx(() {
+                                      // Only wrap the widgets that depend on observable variables in Obx
+                                      final color = moodController.moods
+                                          .where((m) => m.UserID == 'currentUserId')
+                                          .expand((m) => m.Date
+                                              .asMap()
+                                              .entries
+                                              .where((e) => e.value.isSameDate(date))
+                                              .map((e) => moodController.getMoodColor(m.Mood[e.key])))
+                                          .firstOrNull ??
+                                          const Color.fromARGB(255, 220, 218, 218);
+                                      return Column(
+                                        children: [
+                                          Text(
+                                            ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][date.weekday - 1],
+                                            style: Theme.of(context).textTheme.bodyMedium,
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                              "${date.day}",
-                                              style: Theme.of(context).textTheme.bodyMedium,
+                                          const SizedBox(height: 3),
+                                          Container(
+                                            width: 35,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                              color: color,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                "${date.day}",
+                                                style: Theme.of(context).textTheme.bodyMedium,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
+                                        ],
+                                      );
+                                    }),
                                   ),
                                 );
                               }).toList(),

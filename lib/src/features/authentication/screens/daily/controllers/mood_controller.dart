@@ -56,13 +56,30 @@ class MoodController extends GetxController {
         existingMood.Mood.add(mood);
       }
 
-      if (existingMood.Date.isEmpty && existingMood.Mood.isEmpty) {
-        await _moodRepository.createUserMood(existingMood);
-      } else {
+      await _moodRepository.updateUserMood(existingMood);
+
+      // Refresh user mood data
+      loadUserMood(userID);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> ensureMoodEntryForDate(String userID, DateTime date) async {
+    isLoading.value = true;
+    try {
+      final existingMood = moods.firstWhere(
+        (m) => m.UserID == userID,
+        orElse: () => UserMood(UserID: userID, Date: [], Mood: []),
+      );
+
+      final dateIndex = existingMood.Date.indexWhere((d) => d.toDate().isSameDate(date));
+      if (dateIndex == -1) {
+        existingMood.Date.add(Timestamp.fromDate(date));
+        existingMood.Mood.add("-");
         await _moodRepository.updateUserMood(existingMood);
       }
 
-      // Refresh user mood data
       loadUserMood(userID);
     } finally {
       isLoading.value = false;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/features/authentication/screens/daily/add_mood_screen.dart';
 import 'package:fyp/src/features/authentication/screens/daily/controllers/daily_challenge_controller.dart';
-import 'package:fyp/src/features/authentication/screens/daily/controllers/mood_controller.dart'; // Import MoodController
+import 'package:fyp/src/features/authentication/screens/daily/controllers/mood_controller.dart';
 import 'package:fyp/src/features/authentication/screens/daily/widget/timestamp_extension.dart';
 import 'package:get/get.dart';
 import 'package:fyp/src/constants/colors.dart';

@@ -32,6 +32,10 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
 
+  ## YOUTUBE PLAYER
+  youtube_player_flutter: ^9.0.1
+  flutter_inappwebview: ^6.0.0
+
   ## FIREBASE PACKAGES
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.8

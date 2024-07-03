@@ -22,13 +22,11 @@ final List<MeditationCategory> categories = [
   MeditationCategory(icon: Iconsax.timer, title: 'Focus'),
   MeditationCategory(icon: Iconsax.wind, title: 'Relax'),
 ];
-
 class MeditationScreen extends StatelessWidget {
   const MeditationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
         appBar: PageTitleWidget(title: tMeditation),
@@ -45,9 +43,7 @@ class MeditationScreen extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-
               const SizedBox(height: tFormHeight - 20),
-
               Container(
                 padding: const EdgeInsets.only(left: 20),
                 height: 100,
@@ -69,9 +65,7 @@ class MeditationScreen extends StatelessWidget {
                   },
                 ),
               ),
-
               const SizedBox(height: tFormHeight - 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
@@ -81,13 +75,25 @@ class MeditationScreen extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-
               const SizedBox(height: tFormHeight - 20),
-
-              MeditationAudioWidget(audioTitle: "Stress Relief", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage1),
-              MeditationAudioWidget(audioTitle: "Study and Focus", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage2,),
-              MeditationAudioWidget(audioTitle: "Sleep", audioSubtitle: "5 mins | beg", backgroundImages: tMeditationImage3,),
-              
+              MeditationAudioWidget(
+                audioTitle: "Stress Relief",
+                audioSubtitle: "5 mins | beg",
+                backgroundImages: tMeditationImage1,
+                videoUrl: "https://www.youtube.com/watch?v=inpok4MKVLM", // Add video URL
+              ),
+              // MeditationAudioWidget(
+              //   audioTitle: "Study and Focus",
+              //   audioSubtitle: "5 mins | beg",
+              //   backgroundImages: tMeditationImage2,
+              //   videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Example URL, replace with actual URL
+              // ),
+              // MeditationAudioWidget(
+              //   audioTitle: "Sleep",
+              //   audioSubtitle: "5 mins | beg",
+              //   backgroundImages: tMeditationImage3,
+              //   videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Example URL, replace with actual URL
+              // ),
             ],
           ),
         ),

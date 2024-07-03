@@ -2,24 +2,79 @@ import 'package:flutter/material.dart';
 import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/image_strings.dart';
 import 'package:fyp/src/constants/sizes.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class MeditationAudioWidget extends StatelessWidget {
+class MeditationAudioWidget extends StatefulWidget {
   const MeditationAudioWidget({
     super.key,
     required this.audioTitle,
     required this.audioSubtitle,
     required this.backgroundImages,
+    required this.videoUrl,
   });
 
   final String audioTitle;
   final String audioSubtitle;
   final String backgroundImages;
+  final String videoUrl;
+
+  @override
+  _MeditationAudioWidgetState createState() => _MeditationAudioWidgetState();
+}
+
+class _MeditationAudioWidgetState extends State<MeditationAudioWidget> {
+  late YoutubePlayerController _controller;
+  bool _isPlaying = false;
+  bool _isPlayerReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+        hideThumbnail: true,
+        controlsVisibleAtStart: false,
+        forceHD: true,
+      ),
+    )..addListener(_listener);
+  }
+
+  void _listener() {
+    if (_controller.value.isReady && !_isPlayerReady) {
+      setState(() {
+        _isPlayerReady = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_listener);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _togglePlayPause() {
+    if (_isPlayerReady) {
+      setState(() {
+        if (_isPlaying) {
+          _controller.pause();
+        } else {
+          _controller.play();
+        }
+        _isPlaying = !_isPlaying;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Added vertical padding for top and bottom margins
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
         width: size.width * 0.9,
         height: size.height * 0.3,
@@ -28,7 +83,7 @@ class MeditationAudioWidget extends StatelessWidget {
           color: tGreyColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(backgroundImages),
+            image: AssetImage(widget.backgroundImages),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.6),
@@ -54,22 +109,18 @@ class MeditationAudioWidget extends StatelessWidget {
                       child: Text('Remove'),
                     ),
                   ],
-                  child: Icon(
+                  child: const Icon(
                     Icons.more_horiz,
                     color: Colors.black,
                   ),
                 ),
               ),
             ),
-
-            // Second Row
             Flexible(
               flex: 2,
               fit: FlexFit.loose,
               child: Container(),
             ),
-
-            // Third Row
             Flexible(
               flex: 2,
               fit: FlexFit.loose,
@@ -82,11 +133,11 @@ class MeditationAudioWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          audioTitle,
+                          widget.audioTitle,
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         Text(
-                          audioSubtitle,
+                          widget.audioSubtitle,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
@@ -95,16 +146,14 @@ class MeditationAudioWidget extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
-                      onTap: () {
-                        // Handle play/pause action
-                      },
+                      onTap: _togglePlayPause,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Container(
                             width: 50,
                             height: 50,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
@@ -117,13 +166,29 @@ class MeditationAudioWidget extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Colors.black, width: 2),
                             ),
-                            child: Icon(Icons.play_arrow, color: Colors.black),
+                            child: Icon(
+                              _isPlaying ? Icons.pause : Icons.play_arrow,
+                              color: Colors.black,
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ],
+              ),
+            ),
+            // Add a hidden YouTube player for audio playback
+            SizedBox(
+              height: 0,
+              width: 0,
+              child: YoutubePlayer(
+                controller: _controller,
+                onReady: () {
+                  setState(() {
+                    _isPlayerReady = true;
+                  });
+                },
               ),
             ),
           ],

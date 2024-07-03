@@ -21,7 +21,11 @@ class AddMoodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: "Add Mood", backgroundColor: tOrangeColor, backIcon: LineAwesomeIcons.angle_left_solid),
+        appBar: PageTitleWidget(
+          title: "Add Mood",
+          backgroundColor: tOrangeColor,
+          backIcon: LineAwesomeIcons.angle_left_solid,
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,35 +42,35 @@ class AddMoodScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MoodButton(
-                      imagePath: tHappyFace,
-                      mood: 'happy',
-                      onSelected: (mood) => selectedMood.value = mood,
-                      isSelected: selectedMood.value == 'happy',
-                    ),
-                    MoodButton(
-                      imagePath: tMadFace,
-                      mood: 'mad',
-                      onSelected: (mood) => selectedMood.value = mood,
-                      isSelected: selectedMood.value == 'mad',
-                    ),
-                    MoodButton(
-                      imagePath: tSadFace,
-                      mood: 'sad',
-                      onSelected: (mood) => selectedMood.value = mood,
-                      isSelected: selectedMood.value == 'sad',
-                    ),
-                    MoodButton(
-                      imagePath: tNormalFace,
-                      mood: 'normal',
-                      onSelected: (mood) => selectedMood.value = mood,
-                      isSelected: selectedMood.value == 'normal',
-                    ),
-                  ],
-                ),
+                child: Obx(() => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MoodButton(
+                          imagePath: tHappyFace,
+                          mood: 'happy',
+                          onSelected: (mood) => selectedMood.value = mood,
+                          isSelected: selectedMood.value == 'happy',
+                        ),
+                        MoodButton(
+                          imagePath: tMadFace,
+                          mood: 'mad',
+                          onSelected: (mood) => selectedMood.value = mood,
+                          isSelected: selectedMood.value == 'mad',
+                        ),
+                        MoodButton(
+                          imagePath: tSadFace,
+                          mood: 'sad',
+                          onSelected: (mood) => selectedMood.value = mood,
+                          isSelected: selectedMood.value == 'sad',
+                        ),
+                        MoodButton(
+                          imagePath: tNormalFace,
+                          mood: 'normal',
+                          onSelected: (mood) => selectedMood.value = mood,
+                          isSelected: selectedMood.value == 'normal',
+                        ),
+                      ],
+                    )),
               ),
               const SizedBox(height: 30),
               Padding(
@@ -119,18 +123,34 @@ class MoodButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => onSelected(mood),
-      child: Container(
-        width: 80,
-        height: 80,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: isSelected ? Colors.grey[300] : tWhiteColor,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Image.asset(imagePath),
-        ),
+      child: Column(
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isSelected ? Colors.grey[300] : tWhiteColor,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(0),
+              child: Image.asset(imagePath),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            mood.capitalizeFirstLetter(),
+            style: TextStyle(color: isSelected ? tBlackColor : tGreyColor),
+          ),
+        ],
       ),
     );
+  }
+}
+
+extension CustomStringExtension on String {
+  String capitalizeFirstLetter() {
+    if (isEmpty) return this;
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

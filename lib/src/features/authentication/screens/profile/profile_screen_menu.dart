@@ -96,16 +96,16 @@ class ProfileScreenMenu extends StatelessWidget {
                           icon: LineAwesomeIcons.cog_solid,
                           onPress: () => Get.to(() => ProfileSettingsScreen()),
                         ),
-                        ProfileMenuWidget(
-                          title: tMenu2Help,
-                          icon: LineAwesomeIcons.hands_helping_solid,
-                          onPress: () {},
-                        ),
-                        ProfileMenuWidget(
-                          title: tMenu3Notifications,
-                          icon: LineAwesomeIcons.bell_solid,
-                          onPress: () {},
-                        ),
+                        // ProfileMenuWidget(
+                        //   title: tMenu2Help,
+                        //   icon: LineAwesomeIcons.hands_helping_solid,
+                        //   onPress: () {},
+                        // ),
+                        // ProfileMenuWidget(
+                        //   title: tMenu3Notifications,
+                        //   icon: LineAwesomeIcons.bell_solid,
+                        //   onPress: () {},
+                        // ),
                         const Divider(),
                         ProfileMenuWidget(
                           title: tLogout,

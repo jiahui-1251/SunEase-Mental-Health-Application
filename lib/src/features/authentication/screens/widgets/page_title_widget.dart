@@ -9,10 +9,12 @@ class PageTitleWidget extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.backgroundColor,
+    this.backIcon,
   });
 
   final String title;
   final Color? backgroundColor;
+  final IconData? backIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class PageTitleWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () => Get.back(),
-        icon: const Icon(LineAwesomeIcons.angle_left_solid),
+        icon: Icon(backIcon),
       ),
       title: Text(
         title,

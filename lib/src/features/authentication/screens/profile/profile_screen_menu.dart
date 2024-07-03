@@ -24,7 +24,7 @@ class ProfileScreenMenu extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tProfile),
+        appBar: PageTitleWidget(title: tProfile, backIcon:  LineAwesomeIcons.smile),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize - 20),

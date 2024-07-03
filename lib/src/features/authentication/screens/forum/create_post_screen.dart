@@ -5,6 +5,7 @@ import 'package:fyp/src/features/authentication/screens/widgets/page_title_widge
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
 import 'package:fyp/src/repository/forum_repository/forum_repository.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -60,7 +61,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tCreatePost, backgroundColor: tOrangeColor),
+        appBar: PageTitleWidget(title: tCreatePost, backgroundColor: tOrangeColor, backIcon: LineAwesomeIcons.angle_left_solid),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Form(

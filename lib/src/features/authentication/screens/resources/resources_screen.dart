@@ -3,6 +3,7 @@ import 'package:fyp/src/constants/colors.dart';
 import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResourcesScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class ResourcesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tResources, backgroundColor: tOrangeColor),
+        appBar: PageTitleWidget(title: tResources, backgroundColor: tOrangeColor, backIcon: LineAwesomeIcons.smile),
         body: SingleChildScrollView(
           child: Column(
             children: [

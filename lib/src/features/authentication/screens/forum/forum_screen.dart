@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp/src/common_widgets/custom_shapes/container/primary_header_container.dart';
+import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/screens/forum/create_post_screen.dart';
+import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:fyp/src/features/authentication/screens/forum/widget/post_widget.dart';
 import 'package:fyp/src/features/forum_post/models/forum_model.dart';
@@ -11,6 +13,7 @@ import 'package:fyp/src/constants/sizes.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/vertical_image_text.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 // Define a class to hold icon and title data
 class CategoryItem {
@@ -40,12 +43,43 @@ class _ForumScreenState extends State<ForumScreen> {
   String? selectedCategory;
 
   @override
+  void dispose() {
+    selectedCategory = null; // Reset the selected category when disposing the widget
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final PostController postController = Get.find<PostController>();
 
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tForum, backgroundColor: tOrangeColor),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              setState(() {
+                selectedCategory = null; // Reset the selected category when back button is pressed
+              });
+              Get.back();
+            },
+            icon: Icon(LineAwesomeIcons.angle_left_solid),
+          ),
+          title: Text(
+            tForum,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          backgroundColor: tOrangeColor,
+          actions: [
+            IconButton(
+              icon: const Icon(LineAwesomeIcons.sign_out_alt_solid),
+              onPressed: () async {
+                final signUpController = Get.find<SignUpController>();
+                await signUpController.signOut();
+                Get.offAll(() => const LoginScreen());
+              },
+            ),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

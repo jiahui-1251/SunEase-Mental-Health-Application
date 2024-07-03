@@ -12,7 +12,7 @@ class ProfileSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PageTitleWidget(title: tMenu1Settings),
+      appBar: const PageTitleWidget(title: tMenu1Settings, backIcon:  LineAwesomeIcons.angle_left_solid),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(tDefaultSize - 20),

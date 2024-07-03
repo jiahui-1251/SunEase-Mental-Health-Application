@@ -8,6 +8,7 @@ import 'package:fyp/src/features/authentication/screens/widgets/horizontal_image
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 // Define a class to hold icon and title data
 class MeditationCategory {
@@ -137,7 +138,23 @@ class _MeditationScreenState extends State<MeditationScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tMeditation),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              setState(() {
+                selectedCategory = 'Trending'; // Reset the selected category when back button is pressed
+                meditationWidgets = _buildMeditationWidgets('Trending');
+              });
+              Get.back();
+            },
+            icon: Icon(LineAwesomeIcons.angle_left_solid),
+          ),
+          title: Text(
+            tMeditation,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          backgroundColor: tOrangeColor,
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

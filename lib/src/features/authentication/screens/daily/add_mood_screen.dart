@@ -5,6 +5,7 @@ import 'package:fyp/src/features/authentication/screens/widgets/page_title_widge
 import 'package:get/get.dart';
 import 'package:fyp/src/features/authentication/screens/daily/controllers/mood_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class AddMoodScreen extends StatelessWidget {
   final DateTime date;
@@ -20,7 +21,7 @@ class AddMoodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: "Add Mood", backgroundColor: tOrangeColor),
+        appBar: PageTitleWidget(title: "Add Mood", backgroundColor: tOrangeColor, backIcon: LineAwesomeIcons.angle_left_solid),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

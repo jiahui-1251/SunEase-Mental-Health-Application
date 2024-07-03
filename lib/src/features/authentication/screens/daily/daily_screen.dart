@@ -10,6 +10,7 @@ import 'package:fyp/src/constants/text_strings.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:fyp/src/features/authentication/screens/daily/widget/challenge_tile_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key});
@@ -53,7 +54,7 @@ class _DailyScreenState extends State<DailyScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: tDaily),
+        appBar: PageTitleWidget(title: tDaily,backgroundColor: tOrangeColor, backIcon: LineAwesomeIcons.smile),
         body: Obx(() {
           if (dailyChallengeController.userChallenge.value == null ||
               dailyChallengeController.dailyChallenges.isEmpty) {
@@ -69,7 +70,7 @@ class _DailyScreenState extends State<DailyScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                         child: Text(
                           "Daily Challenges",
                           style: Theme.of(context).textTheme.titleSmall,

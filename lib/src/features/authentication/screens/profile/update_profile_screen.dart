@@ -17,7 +17,7 @@ class UpdateProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
     return Scaffold(
-        appBar: PageTitleWidget(title: tEditProfile),  
+        appBar: PageTitleWidget(title: tEditProfile, backIcon:  LineAwesomeIcons.angle_left_solid),  
         body: SingleChildScrollView(
           child: Container(
           padding: const EdgeInsets.all(tDefaultSize-20),

@@ -1,5 +1,8 @@
 // Image Strings 
 
+//App icon
+const String appImage = "assets/images/app_icon.png";
+
 //Splash Screens
 const String testingImage = "assets/images/sun_logo.png";
 

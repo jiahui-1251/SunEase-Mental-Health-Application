@@ -94,28 +94,28 @@ class _MeditationAudioWidgetState extends State<MeditationAudioWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              flex: 1,
-              fit: FlexFit.loose,
-              child: Align(
-                alignment: Alignment.topRight,
-                child: PopupMenuButton(
-                  onSelected: (value) {
-                    // Handle the remove action
-                  },
-                  itemBuilder: (BuildContext context) => [
-                    const PopupMenuItem(
-                      value: 'remove',
-                      child: Text('Remove'),
-                    ),
-                  ],
-                  child: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
+            // Flexible(
+            //   flex: 1,
+            //   fit: FlexFit.loose,
+            //   child: Align(
+            //     alignment: Alignment.topRight,
+            //     child: PopupMenuButton(
+            //       onSelected: (value) {
+            //         // Handle the remove action
+            //       },
+            //       itemBuilder: (BuildContext context) => [
+            //         const PopupMenuItem(
+            //           value: 'remove',
+            //           child: Text('Remove'),
+            //         ),
+            //       ],
+            //       child: const Icon(
+            //         Icons.more_horiz,
+            //         color: Colors.black,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Flexible(
               flex: 2,
               fit: FlexFit.loose,

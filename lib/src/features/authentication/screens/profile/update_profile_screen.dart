@@ -175,6 +175,16 @@ class UpdateProfileScreen extends StatelessWidget {
                             );
 
                             await controller.updateRecord(userDataNew);
+
+                            // Show snackbar on successful update
+                            Get.snackbar(
+                              'Success',
+                              'Profile updated successfully!',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: tOrangeColor,
+                              colorText: Colors.white,
+                              margin: EdgeInsets.all(10),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: tOrangeColor,

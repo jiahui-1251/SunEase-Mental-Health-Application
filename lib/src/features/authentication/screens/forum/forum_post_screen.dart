@@ -6,6 +6,7 @@ import 'package:fyp/src/features/forum_post/models/forum_model.dart';
 import 'package:fyp/src/features/authentication/screens/widgets/page_title_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ForumPostScreen extends StatefulWidget {
   final ForumPostModel post;
@@ -44,7 +45,7 @@ class _ForumPostScreenState extends State<ForumPostScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PageTitleWidget(title: "Forum Post"),
+        appBar: PageTitleWidget(title: "Forum Post", backIcon: LineAwesomeIcons.angle_left_solid),
         body: Stack(
           children: [
             SingleChildScrollView(

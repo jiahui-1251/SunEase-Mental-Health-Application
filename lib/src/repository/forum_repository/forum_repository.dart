@@ -8,9 +8,13 @@ class ForumPostRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<List<ForumPostModel>> getAllPosts() async {
+  Future<List<ForumPostModel>> getAllPosts(String? category) async {
     try {
-      QuerySnapshot querySnapshot = await _db.collection("ForumPost").get();
+      Query query = _db.collection("ForumPost");
+      if (category != null) {
+        query = query.where("Category", isEqualTo: category);
+      }
+      QuerySnapshot querySnapshot = await query.get();
       return querySnapshot.docs
           .map((doc) => ForumPostModel.fromSnapshot(doc as DocumentSnapshot<Map<String, dynamic>>))
           .toList();

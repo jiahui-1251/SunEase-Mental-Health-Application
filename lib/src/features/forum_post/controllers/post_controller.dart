@@ -7,15 +7,8 @@ class PostController extends GetxController {
 
   final _forumPostRepo = Get.find<ForumPostRepository>();
 
-  Future<List<ForumPostModel>> getAllPosts() async {
-    try {
-      List<ForumPostModel> posts = await _forumPostRepo.getAllPosts();
-      print("Fetched posts: ${posts.length}");
-      return posts;
-    } catch (e) {
-      print("Error fetching posts: $e");
-      return [];
-    }
+  Future<List<ForumPostModel>> getAllPosts(String? category) async {
+    return await ForumPostRepository.instance.getAllPosts(category);
   }
 
   Future<void> createPost(ForumPostModel post) async {

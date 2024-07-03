@@ -29,8 +29,15 @@ final List<CategoryItem> categories = [
   CategoryItem(icon: Iconsax.message_question, title: 'Others'),
 ];
 
-class ForumScreen extends StatelessWidget {
+class ForumScreen extends StatefulWidget {
   const ForumScreen({super.key});
+
+  @override
+  _ForumScreenState createState() => _ForumScreenState();
+}
+
+class _ForumScreenState extends State<ForumScreen> {
+  String? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +96,9 @@ class ForumScreen extends StatelessWidget {
                             textColor: tBlackColor,
                             backgroundColor: tGreyColor,
                             onTap: () {
-                              // Handle the tap event
+                              setState(() {
+                                selectedCategory = category.title;
+                              });
                             },
                           );
                         },
@@ -98,14 +107,14 @@ class ForumScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        tTrendingPost,
+                        selectedCategory == null ? tTrendingPost : selectedCategory!,
                         style: Theme.of(context).textTheme.titleSmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     FutureBuilder<List<ForumPostModel>>(
-                      future: postController.getAllPosts(),
+                      future: postController.getAllPosts(selectedCategory),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());

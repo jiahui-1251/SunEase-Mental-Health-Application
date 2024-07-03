@@ -19,8 +19,8 @@ class MeditationCategory {
 
 // Create a list of CategoryItem instances
 final List<MeditationCategory> categories = [
-  MeditationCategory(icon: Iconsax.timer, title: 'Focus'),
-  MeditationCategory(icon: Iconsax.wind, title: 'Relax'),
+  MeditationCategory(icon: Iconsax.timer, title: 'Beg'),
+  MeditationCategory(icon: Iconsax.wind, title: 'High'),
 ];
 class MeditationScreen extends StatelessWidget {
   const MeditationScreen({super.key});
@@ -77,23 +77,42 @@ class MeditationScreen extends StatelessWidget {
               ),
               const SizedBox(height: tFormHeight - 20),
               MeditationAudioWidget(
-                audioTitle: "Stress Relief",
+                audioTitle: "Daily Meditation",
                 audioSubtitle: "5 mins | beg",
                 backgroundImages: tMeditationImage1,
-                videoUrl: "https://www.youtube.com/watch?v=inpok4MKVLM", // Add video URL
+                videoUrl: "https://www.youtube.com/watch?v=inpok4MKVLM", 
               ),
-              // MeditationAudioWidget(
-              //   audioTitle: "Study and Focus",
-              //   audioSubtitle: "5 mins | beg",
-              //   backgroundImages: tMeditationImage2,
-              //   videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Example URL, replace with actual URL
-              // ),
-              // MeditationAudioWidget(
-              //   audioTitle: "Sleep",
-              //   audioSubtitle: "5 mins | beg",
-              //   backgroundImages: tMeditationImage3,
-              //   videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Example URL, replace with actual URL
-              // ),
+              MeditationAudioWidget(
+                audioTitle: "Stress Relief",
+                audioSubtitle: "10 mins | beg",
+                backgroundImages: tMeditationImage2,
+                videoUrl: "https://youtu.be/z6X5oEIg6Ak?si=KktmB0-v7WilvAh3", 
+              ),
+              MeditationAudioWidget(
+                audioTitle: "Sleep",
+                audioSubtitle: "10 mins | beg",
+                backgroundImages: tMeditationImage3,
+                videoUrl: "https://youtu.be/aEqlQvczMJQ?si=5Gqi0zTg191O1XZw", 
+              ),
+              
+              MeditationAudioWidget(
+                audioTitle: "Anxiety",
+                audioSubtitle: "10 mins | beg",
+                backgroundImages: tMeditationImage4,
+                videoUrl: "https://youtu.be/O-6f5wQXSu8?si=eDWbBaK3wvxosFxu", 
+              ),
+              MeditationAudioWidget(
+                audioTitle: "Healing",
+                audioSubtitle: "10 mins | beg",
+                backgroundImages: tMeditationImage5,
+                videoUrl: "https://youtu.be/2FGR-OspxsU?si=hcDC1Yl9p6yYOdxq", 
+              ),
+              MeditationAudioWidget(
+                audioTitle: "Self Love",
+                audioSubtitle: "15 mins | high beg",
+                backgroundImages: tMeditationImage6,
+                videoUrl: "https://youtu.be/itZMM5gCboo?si=jD_VqEGsJKhaXnoZ", 
+              ),
             ],
           ),
         ),

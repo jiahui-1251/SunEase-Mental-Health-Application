@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PostCommentModel {
   final String commentID;
   final String parentID;
-  final int likeNum;
+  int likeNum;
   final Timestamp commentTime;
   final String userType;
   final String commentContent;
@@ -27,6 +27,8 @@ class PostCommentModel {
       'CommentContent': commentContent,
     };
   }
+    // Convert Timestamp to DateTime
+  DateTime get commentDateTime => commentTime.toDate();
 
   factory PostCommentModel.fromMap(Map<String, dynamic> map) {
     return PostCommentModel(

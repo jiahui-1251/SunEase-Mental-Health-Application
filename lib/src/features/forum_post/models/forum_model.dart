@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ForumPostModel {
   final String? PostID;
   final String Category;
-  final int? ComNum;
+  int? ComNum;
   final int? LikeNum;
   final String PostContent;
   final DateTime PostDateTime;

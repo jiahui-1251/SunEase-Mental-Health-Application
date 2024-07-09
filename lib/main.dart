@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fyp/src/features/authentication/controllers/authentication_controllers.dart';
 import 'package:fyp/src/features/authentication/screens/login/login_screen.dart';
-import 'package:fyp/src/features/authentication/controllers/post_controller.dart';
+import 'package:fyp/src/features/forum_post/controllers/post_controller.dart';
 import 'package:fyp/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:fyp/src/repository/forum_repository/forum_repository.dart';
 import 'package:fyp/src/repository/user_repository/user_repository.dart';

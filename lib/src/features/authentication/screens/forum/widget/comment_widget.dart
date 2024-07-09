@@ -94,25 +94,25 @@ class _CommentWidgetState extends State<CommentWidget> {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     SizedBox(width: 20),
-                    GestureDetector(
-                      onTap: _toggleLike,
-                      child: Row(
-                        children: [
-                          Icon(
-                            isLiked ? Icons.favorite : Icons.favorite_border,
-                            size: 16,
-                            color: tOrangeColor,
-                          ),
-                          SizedBox(width: 5),
-                          Text(likeNum.toString(),
-                              style: Theme.of(context).textTheme.bodySmall),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    Icon(Icons.reply, size: 16, color: tOrangeColor),
-                    SizedBox(width: 5),
-                    Text('Reply', style: Theme.of(context).textTheme.bodySmall),
+                    // GestureDetector(
+                    //   onTap: _toggleLike,
+                    //   child: Row(
+                    //     children: [
+                    //       Icon(
+                    //         isLiked ? Icons.favorite : Icons.favorite_border,
+                    //         size: 16,
+                    //         color: tOrangeColor,
+                    //       ),
+                    //       SizedBox(width: 5),
+                    //       Text(likeNum.toString(),
+                    //           style: Theme.of(context).textTheme.bodySmall),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(width: 20),
+                    // Icon(Icons.reply, size: 16, color: tOrangeColor),
+                    // SizedBox(width: 5),
+                    // Text('Reply', style: Theme.of(context).textTheme.bodySmall),
                   ],
                 ),
               ],

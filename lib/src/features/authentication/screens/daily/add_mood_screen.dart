@@ -46,12 +46,6 @@ class AddMoodScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         MoodButton(
-                          imagePath: tHappyFace,
-                          mood: 'happy',
-                          onSelected: (mood) => selectedMood.value = mood,
-                          isSelected: selectedMood.value == 'happy',
-                        ),
-                        MoodButton(
                           imagePath: tMadFace,
                           mood: 'mad',
                           onSelected: (mood) => selectedMood.value = mood,
@@ -68,6 +62,12 @@ class AddMoodScreen extends StatelessWidget {
                           mood: 'normal',
                           onSelected: (mood) => selectedMood.value = mood,
                           isSelected: selectedMood.value == 'normal',
+                        ),
+                        MoodButton(
+                          imagePath: tHappyFace,
+                          mood: 'happy',
+                          onSelected: (mood) => selectedMood.value = mood,
+                          isSelected: selectedMood.value == 'happy',
                         ),
                       ],
                     )),

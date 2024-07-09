@@ -197,22 +197,22 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: tFormHeight),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.redAccent.withOpacity(0.1),
-                              elevation: 0,
-                              foregroundColor: Colors.red,
-                              shape: const StadiumBorder(),
-                              side: BorderSide.none,
-                            ),
-                            child: const Text(tDelete),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     ElevatedButton(
+                      //       onPressed: () {},
+                      //       style: ElevatedButton.styleFrom(
+                      //         backgroundColor: Colors.redAccent.withOpacity(0.1),
+                      //         elevation: 0,
+                      //         foregroundColor: Colors.red,
+                      //         shape: const StadiumBorder(),
+                      //         side: BorderSide.none,
+                      //       ),
+                      //       child: const Text(tDelete),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

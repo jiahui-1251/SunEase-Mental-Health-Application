@@ -16,7 +16,7 @@ class SignUpFormWidget extends StatefulWidget {
 
 class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(SignUpController());
+  final SignUpController controller = Get.put(SignUpController());
 
   final FocusNode userNameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
@@ -79,7 +79,6 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 return null;
               },
             ),
-
             const SizedBox(height: tFormHeight - 20),
             
             // User Name
@@ -104,7 +103,6 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 FocusScope.of(context).requestFocus(emailFocusNode);
               },
             ),
-
             const SizedBox(height: tFormHeight - 20),
             
             // Email
@@ -130,6 +128,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               },
             ),
             const SizedBox(height: tFormHeight - 20),
+            
             // Password
             TextFormField(
               focusNode: passwordFocusNode,
@@ -153,7 +152,6 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 FocusScope.of(context).requestFocus(confirmPasswordFocusNode);
               },
             ),
-
             const SizedBox(height: tFormHeight - 20),
             
             // Confirm Password
@@ -177,22 +175,17 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               },
             ),
             const SizedBox(height: tFormHeight - 30),
+            
             // Privacy Policy
             PrivayPolicy(),
+            
             // SignUp Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final user = UserModel(
-                      email: controller.email.text.trim(),
-                      password: controller.password.text.trim(),
-                      UserName: controller.userName.text.trim(),
-                      UserType: controller.UserType.value,
-                    );
-                    // SignUpController.instance.createUser(user, context);
-
+                  if (_formKey.currentState?.validate() ?? false) {
+                    // Ensure context is valid before calling signUp
                     controller.signUserUp(context);
                   }
                 },

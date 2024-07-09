@@ -17,21 +17,23 @@ class SignUpController extends GetxController {
   var UserType = ''.obs;
   final userRepo = Get.put(UserRepository());
 
-  void signUserUp(BuildContext context) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(
-            color: Colors.orange,
-          ),
-        );
-      },
-    );
+   void signUserUp(BuildContext context) async {
+    // Ensure the context is still valid for showing dialogs
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.orange,
+            ),
+          );
+        },
+      );
+    }
 
     try {
       if (password.text == confirmPassword.text) {
-        print('Email: ${email.text}, Password: ${password.text}');
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text,
           password: password.text,
@@ -50,23 +52,23 @@ class SignUpController extends GetxController {
 
           await userRepo.createUser(newUser);
 
-          Navigator.pop(context);
+          if (context.mounted) Navigator.pop(context); // Close progress indicator
 
           // Redirect to login screen
           Get.offAll(() => const LoginScreen());
         } else {
-          Navigator.pop(context);
+          if (context.mounted) Navigator.pop(context); // Close progress indicator
           showErrorMessage(context, "Failed to retrieve user ID");
         }
       } else {
-        Navigator.pop(context);
+        if (context.mounted) Navigator.pop(context); // Close progress indicator
         showErrorMessage(context, "Passwords don't match");
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+      if (context.mounted) Navigator.pop(context); // Close progress indicator
       showErrorMessage(context, e.message ?? "Unknown error occurred");
     } catch (e) {
-      Navigator.pop(context);
+      if (context.mounted) Navigator.pop(context); // Close progress indicator
       showErrorMessage(context, "An unexpected error occurred");
       print(e); // Log any unexpected errors
     }
@@ -93,22 +95,51 @@ class SignUpController extends GetxController {
     await FirebaseAuth.instance.signOut();
   }
 
-  Future<void> deleteAccount(BuildContext context) async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
+Future<void> deleteAccount(BuildContext context) async {
+  try {
+    User? user = FirebaseAuth.instance.currentUser;
 
-      if (user != null) {
-        // Delete user data from Firestore
-        await userRepo.deleteUser(user.uid);
+    if (user != null) {
+      // Show loading dialog before starting the async operation
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.orange,
+              ),
+            );
+          },
+        );
+      }
 
-        // Delete user authentication
-        await user.delete();
+      // Delete user data from Firestore
+      await userRepo.deleteUser(user.uid);
 
-        // Redirect to login screen
+      // Delete user authentication
+      await user.delete();
+
+      // Hide loading dialog and redirect to login screen
+      if (context.mounted) {
+        Navigator.of(context).pop(); // Close the loading dialog
         Get.offAll(() => const LoginScreen());
       }
-    } on FirebaseAuthException catch (e) {
+    }
+  } on FirebaseAuthException catch (e) {
+    // Hide loading dialog and show error message
+    if (context.mounted) {
+      Navigator.of(context).pop(); // Close the loading dialog
       showErrorMessage(context, e.message ?? "Unknown error occurred");
     }
+  } catch (e) {
+    // Hide loading dialog and show unexpected error message
+    if (context.mounted) {
+      Navigator.of(context).pop(); // Close the loading dialog
+      showErrorMessage(context, "An unexpected error occurred");
+      print(e); // Log any unexpected errors
+    }
   }
+}
 }

@@ -7,6 +7,29 @@ import 'package:fyp/src/features/authentication/controllers/authentication_contr
 import 'package:fyp/src/features/authentication/models/user_model.dart';
 import 'package:get/get.dart';
 
+// List of valid TLDs
+const List<String> validTlds = [
+  'com', 'org', 'net', 'edu', 'gov', 'mil', 'int', 'co', 'io', 'info', 'biz', 'us',
+  // Add more TLDs as needed
+];
+
+bool isValidEmail(String email) {
+  // Basic email validation
+  final RegExp emailRegExp = RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  );
+
+  if (!emailRegExp.hasMatch(email)) {
+    return false;
+  }
+
+  // Extract the TLD from the email
+  final domainPart = email.split('@').last;
+  final tld = domainPart.split('.').last;
+
+  return validTlds.contains(tld);
+}
+
 class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({super.key});
 
@@ -120,6 +143,8 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
+                } else if (!isValidEmail(value)) {
+                  return 'Please enter a valid email address';
                 }
                 return null;
               },

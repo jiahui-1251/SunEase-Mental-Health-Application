@@ -32,6 +32,9 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
 
+  ## VALIDATORS
+  validators: ^3.0.0
+
   ## YOUTUBE PLAYER
   youtube_player_flutter: ^9.0.1
   flutter_inappwebview: ^6.0.0
